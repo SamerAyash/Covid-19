@@ -1,0 +1,283 @@
+<template>
+    <div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header card-header-primary">
+                    <h4 class="card-title"></h4>
+                    <p class="card-category">آخر تحديث أو إضافة على الجدول كان في<p style="direction: ltr !important;">{{last_update}}</p>
+                </div>
+                <div class="card-body table-responsive">
+                    <form @submit.prevent="save()" v-if="patient.status">
+                        <div class="row form-group">
+                            <div class="col">
+                                <input type="text" class="form-control" v-model="patient.first_name" placeholder="اسم الشخص">
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" v-model="patient.father_name"  placeholder="اسم الوالد">
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" v-model="patient.granddad_name" placeholder="اسم الجد">
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" v-model="patient.last_name" placeholder="اسم العائلة">
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col">
+                                <input type="text" class="form-control" v-model="patient.id_number" placeholder="رقم البطاقة الشخصية">
+                            </div>
+                            <div class="col">
+                                    <select class="form-control" v-model="patient.gender" data-style="btn btn-link" id="genderFormControlSelect1">
+                                        <option disabled selected>الجنس</option>
+                                        <option value="male">رجل</option>
+                                        <option value="female">أنثى</option>
+                                    </select>
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" v-model="patient.phone" placeholder="رقم المحمول">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col">
+                                <input type="text" class="form-control" v-model="patient.city" placeholder="المدينة">
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" v-model="patient.area" placeholder="المنطقة">
+                            </div>
+                            <div class="col">
+                                <input type="date" class="form-control" v-if="isInjured()" v-model="patient.date_injury" placeholder="تاريخ الإصابة">
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" type="submit" >إضافة</button>
+                        <!--<button class="btn btn-primary" type="submit" v-if="patient.id">تعديل</button>
+                        <button class="btn btn-primary" @click="removeForm()" v-if="patient.id">إلغاء</button>-->
+                    </form>
+                    <table class="table table-hover">
+                        <thead class="text-warning">
+                        <th>#</th>
+                        <th>الاسم الكامل</th>
+                        <th>رقم البطاقة الشخصية</th>
+                        <th>الحالة</th>
+                        <th>الجنس</th>
+                        <th>رقم المحمول(الهاتف)</th>
+                        <th>المدينة</th>
+                        <th>المنطقة</th>
+                        <th v-if="isInjured()">تاريخ الإصابة</th>
+                        <th></th>
+                        </thead>
+                        <tbody>
+                        <tr v-for="patient in this.patients" :key="patient.id" :id="'patient'+patient.id">
+                            <td>{{patient.id}}</td>
+                            <td>{{patient.first_name+' '+patient.father_name+' '+' '+ patient.granddad_name+ ' '+ patient.last_name}}</td>
+                            <td>{{patient.id_number}}</td>
+                            <td>
+                                <select class="form-control text-white" data-style="btn btn-link"
+                                        :class="[{'bg-success':patient.status=='healthy'?true:false ,
+                                        'bg-warning':patient.status=='contact'?true:false ,
+                                        'bg-danger':patient.status=='injured'?true:false}]"
+                                        @change="onChange(patient.id,$event)"
+                                >
+                                    <option class="bg-white text-dark"
+                                            :selected="patient.status=='healthy'?'selected':''" value="healthy">معافى</option>
+                                    <option class="bg-white text-dark"
+                                            :selected="patient.status=='contact'?'selected':''" value="contact">مخالط</option>
+                                    <option class="bg-white text-dark"
+                                            :selected="patient.status=='injured'?'selected':''" value="injured">مصاب</option>
+                                </select>
+                            </td>
+                            <td>{{patient.gender}}</td>
+                            <td>{{patient.phone}}</td>
+                            <td>{{patient.city}}</td>
+                            <td>{{patient.area}}</td>
+                            <td v-if="isInjured()">{{patient.date_injury}}</td>
+                            <td class="td-actions d-flex justify-content-between">
+                                <!--<button type="button" rel="tooltip" title="Edit Task"
+                                        @click="edit(patient)"
+                                        class="btn btn-primary btn-link btn-sm">
+                                    <i class="material-icons">edit</i>
+                                </button>-->
+                                <button @click="deletePatient(patient.id,patient.name)" type="button" rel="tooltip" title="Remove"
+                                        class="btn btn-danger btn-link btn-sm">
+                                    <i class="material-icons">close</i>
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li v-for="link in links" class="page-item" :class="link.active?'active':''" :key="link.label">
+                                <a class="page-link" @click.prevent="getPatient(link.url)">
+                                    {{link.label}}
+                                    <span class="sr-only">{{link.active?'(current)':''}}
+                                    </span></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</template>
+
+<script>
+export default {
+    name: "PatientTableComponent",
+    props:['route'],
+    data(){
+        return {
+            patients:[],
+            patient:
+                {
+                    first_name:'',
+                    father_name:'',
+                    granddad_name:'',
+                    last_name:'',
+                    id_number:'',
+                    gender:'',
+                    phone:'',
+                    status:false,
+                    city:'',
+                    area:'',
+                    date_injury :null,
+                },
+            links:[],
+            last_update:''
+        }
+    },
+    mounted() {
+        this.getPatient();
+            this.check();
+    },
+    methods:{
+        check(){
+            if(this.$props.route == '/dashboard/patient/gethealthy'){
+                 this.patient.status = 'healthy';
+                    return 'healthy';
+            }else if(this.$props.route == '/dashboard/patient/getcontact'){
+                this.patient.status = 'contact';
+                return 'contact';
+            }else if(this.$props.route == '/dashboard/patient/getinjured'){
+                this.patient.status = 'injured';
+                return 'injured';
+            }
+        },
+        getPatient(url = this.$props.route){
+            axios.get(url)
+            .then(res=>{
+                console.log(res.data[0]);
+                this.patients=res.data.patients.data;
+                this.last_update=res.data.last_update;
+                this.links=res.data.patients.links;
+            })
+            .catch(err=>{
+                console.log(err);
+            })
+        },
+        closeModal(){
+
+        },
+        deletePatient(id,name){
+            Swal.fire({
+                title: 'هل أنت متأكد؟',
+                text: "لن تتمكن من التراجع عن هذا!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'نعم, احذف العنصر'
+            }).then((result) => {
+                console.log(result)
+                if (result.value) {
+                    axios.delete('/patient/'+id)
+                    .then(res=>{
+                        console.log(this.patients.indexOf(x => {
+                            x.id === id
+                        }))
+                        this.patients.splice(this.patients.map(el=> {return el.id;}).indexOf(id), 1);
+                        Swal.fire(
+                            'تم الحذف !',
+                            'العنصر تم حذفه بنحاح.',
+                            'success'
+                        )
+                    })
+                    .catch(err=>{
+                        console.log(err)
+                    })
+                }
+            })
+        },
+        onChange(id,event){
+            status=event.target.value;
+            axios.put('/patient/'+id,{
+                status:status
+            })
+                .then(res=>{
+                    if (this.$props.route == '/patient')
+                    {
+                        var patient=this.patients.find(el=>  el.id === id);
+                        patient.status = status;
+                        if (patient.status == 'injured')
+                        {
+                            patient.date_injury = res.data.date;
+                        }
+                    }
+                    else{
+                        this.patients.splice(this.patients.map(el=> {return el.id;}).indexOf(id), 1);
+                    }
+
+                    Swal.fire(
+                        'تعديل الحالة !',
+                        'تم تعديل الحالة بنحاج.',
+                        'success'
+                    )
+                })
+                .catch(err=>{
+                    console.log(err);
+                })
+
+        },
+        edit(patient){
+            this.patient= patient;
+        },
+        removeForm(){this.patient=[]},
+        save(){
+            axios.post('/patient',{
+                first_name:this.patient.first_name,
+                father_name:this.patient.father_name,
+                granddad_name:this.patient.granddad_name,
+                last_name:this.patient.last_name,
+                id_number:this.patient.id_number,
+                gender:this.patient.gender,
+                phone:this.patient.phone,
+                status:this.patient.status,
+                city:this.patient.city,
+                area:this.patient.area,
+                date_injury :this.patient.date_injury,
+            })
+            .then(res=>{
+                Swal.fire(
+                    'إضافة حالة جديدة !',
+                    'تم إضافة الحالة بنحاج.',
+                    'success'
+                )
+                this.getPatient();
+                this.patient= {
+                    status: this.check()
+                };
+            })
+        },
+        isInjured(){
+            return (this.patient.status === 'injured' || this.patient.status === false);
+        }
+
+    }
+}
+</script>
+
+<style scoped>
+
+</style>
