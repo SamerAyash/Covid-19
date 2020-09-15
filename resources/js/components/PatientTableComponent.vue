@@ -8,7 +8,7 @@
                     <p class="card-category">آخر تحديث أو إضافة على الجدول كان في<p style="direction: ltr !important;">{{last_update}}</p>
                 </div>
                 <div class="card-body table-responsive">
-                    <form @submit.prevent="save()" v-if="patient.status">
+                    <form @submit.prevent="save()" v-if="onForm()">
                         <div class="row form-group">
                             <div class="col">
                                 <input type="text" class="form-control" v-model="patient.first_name" placeholder="اسم الشخص">
@@ -47,6 +47,9 @@
                                 <input type="text" class="form-control" v-model="patient.area" placeholder="المنطقة">
                             </div>
                             <div class="col">
+                                <input type="date" class="form-control" v-if="isHealign()" v-model="patient.date_injury" placeholder="تاريخ الشفاء">
+                            </div>
+                            <div class="col">
                                 <input type="date" class="form-control" v-if="isInjured()" v-model="patient.date_injury" placeholder="تاريخ الإصابة">
                             </div>
                         </div>
@@ -54,6 +57,11 @@
                         <!--<button class="btn btn-primary" type="submit" v-if="patient.id">تعديل</button>
                         <button class="btn btn-primary" @click="removeForm()" v-if="patient.id">إلغاء</button>-->
                     </form>
+                    <div  class="form-group float-left w-25">
+                        <label for="exampleInputEmail1">البحث</label>
+                        <input type="text" @change="search()" class="form-control" id="exampleInputEmail1"
+                               v-model="searchID"  placeholder="أدخل رقم البطاقة الشخصية">
+                    </div>
                     <table class="table table-hover">
                         <thead class="text-warning">
                         <th>#</th>
@@ -64,7 +72,9 @@
                         <th>رقم المحمول(الهاتف)</th>
                         <th>المدينة</th>
                         <th>المنطقة</th>
+                        <th v-if="isHealign()">تاريخ الشفاء</th>
                         <th v-if="isInjured()">تاريخ الإصابة</th>
+                        <th v-if="isInjured()">عدد أيام الإصابة</th>
                         <th></th>
                         </thead>
                         <tbody>
@@ -75,7 +85,7 @@
                             <td>
                                 <select class="form-control text-white" data-style="btn btn-link"
                                         :class="[{'bg-success':patient.status=='healthy'?true:false ,
-                                        'bg-warning':patient.status=='contact'?true:false ,
+                                        'bg-warning text-dark':patient.status=='contact'?true:false ,
                                         'bg-danger':patient.status=='injured'?true:false}]"
                                         @change="onChange(patient.id,$event)"
                                 >
@@ -91,7 +101,9 @@
                             <td>{{patient.phone}}</td>
                             <td>{{patient.city}}</td>
                             <td>{{patient.area}}</td>
+                            <td v-if="isHealign()">{{patient.date_healing}}</td>
                             <td v-if="isInjured()">{{patient.date_injury}}</td>
+                            <td v-if="isInjured()">{{patient.injury_days}}</td>
                             <td class="td-actions d-flex justify-content-between">
                                 <!--<button type="button" rel="tooltip" title="Edit Task"
                                         @click="edit(patient)"
@@ -112,7 +124,8 @@
                                 <a class="page-link" @click.prevent="getPatient(link.url)">
                                     {{link.label}}
                                     <span class="sr-only">{{link.active?'(current)':''}}
-                                    </span></a>
+                                    </span>
+                                </a>
                             </li>
                         </ul>
                     </nav>
@@ -142,8 +155,11 @@ export default {
                     status:false,
                     city:'',
                     area:'',
+                    date_healing :null,
                     date_injury :null,
+
                 },
+            searchID:'',
             links:[],
             last_update:''
         }
@@ -168,7 +184,6 @@ export default {
         getPatient(url = this.$props.route){
             axios.get(url)
             .then(res=>{
-                console.log(res.data[0]);
                 this.patients=res.data.patients.data;
                 this.last_update=res.data.last_update;
                 this.links=res.data.patients.links;
@@ -223,6 +238,10 @@ export default {
                         if (patient.status == 'injured')
                         {
                             patient.date_injury = res.data.date;
+                            patient.date_healing=null;
+                        }
+                        else if (patient.status == 'healthy'){
+                            patient.date_healing = res.data.date;
                         }
                     }
                     else{
@@ -272,6 +291,31 @@ export default {
         },
         isInjured(){
             return (this.patient.status === 'injured' || this.patient.status === false);
+        },
+
+        isHealign(){
+            return (this.patient.status === 'healthy' || this.patient.status === false);
+        },
+        onForm(){
+            if (this.patient.status == false || this.patient.status == 'healthy'){
+                return false;
+            }
+            else {
+                return true;
+            }
+        },
+        search(){
+            axios.post('/patient/search',{
+                status:this.patient.status,
+                id:this.searchID,
+            })
+            .then(res=>{
+                this.patients=res.data.patients.data;
+                this.links=res.data.patients.links;
+            })
+            .catch(err=>{
+                console.log(err);
+            })
         }
 
     }

@@ -2066,6 +2066,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PatientTableComponent",
   props: ['route'],
@@ -2083,8 +2096,10 @@ __webpack_require__.r(__webpack_exports__);
         status: false,
         city: '',
         area: '',
+        date_healing: null,
         date_injury: null
       },
+      searchID: '',
       links: [],
       last_update: ''
     };
@@ -2111,7 +2126,6 @@ __webpack_require__.r(__webpack_exports__);
 
       var url = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.$props.route;
       axios.get(url).then(function (res) {
-        console.log(res.data[0]);
         _this.patients = res.data.patients.data;
         _this.last_update = res.data.last_update;
         _this.links = res.data.patients.links;
@@ -2167,6 +2181,9 @@ __webpack_require__.r(__webpack_exports__);
 
           if (patient.status == 'injured') {
             patient.date_injury = res.data.date;
+            patient.date_healing = null;
+          } else if (patient.status == 'healthy') {
+            patient.date_healing = res.data.date;
           }
         } else {
           _this3.patients.splice(_this3.patients.map(function (el) {
@@ -2212,6 +2229,29 @@ __webpack_require__.r(__webpack_exports__);
     },
     isInjured: function isInjured() {
       return this.patient.status === 'injured' || this.patient.status === false;
+    },
+    isHealign: function isHealign() {
+      return this.patient.status === 'healthy' || this.patient.status === false;
+    },
+    onForm: function onForm() {
+      if (this.patient.status == false || this.patient.status == 'healthy') {
+        return false;
+      } else {
+        return true;
+      }
+    },
+    search: function search() {
+      var _this5 = this;
+
+      axios.post('/patient/search', {
+        status: this.patient.status,
+        id: this.searchID
+      }).then(function (res) {
+        _this5.patients = res.data.patients.data;
+        _this5.links = res.data.patients.links;
+      })["catch"](function (err) {
+        console.log(err);
+      });
     }
   }
 });
@@ -37863,7 +37903,7 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "card-body table-responsive" }, [
-            _vm.patient.status
+            _vm.onForm()
               ? _c(
                   "form",
                   {
@@ -38155,6 +38195,39 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "col" }, [
+                        _vm.isHealign()
+                          ? _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.patient.date_injury,
+                                  expression: "patient.date_injury"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "date",
+                                placeholder: "تاريخ الشفاء"
+                              },
+                              domProps: { value: _vm.patient.date_injury },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.patient,
+                                    "date_injury",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col" }, [
                         _vm.isInjured()
                           ? _c("input", {
                               directives: [
@@ -38200,6 +38273,41 @@ var render = function() {
                 )
               : _vm._e(),
             _vm._v(" "),
+            _c("div", { staticClass: "form-group float-left w-25" }, [
+              _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                _vm._v("البحث")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.searchID,
+                    expression: "searchID"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  id: "exampleInputEmail1",
+                  placeholder: "أدخل رقم البطاقة الشخصية"
+                },
+                domProps: { value: _vm.searchID },
+                on: {
+                  change: function($event) {
+                    return _vm.search()
+                  },
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.searchID = $event.target.value
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
             _c("table", { staticClass: "table table-hover" }, [
               _c("thead", { staticClass: "text-warning" }, [
                 _c("th", [_vm._v("#")]),
@@ -38218,8 +38326,14 @@ var render = function() {
                 _vm._v(" "),
                 _c("th", [_vm._v("المنطقة")]),
                 _vm._v(" "),
+                _vm.isHealign() ? _c("th", [_vm._v("تاريخ الشفاء")]) : _vm._e(),
+                _vm._v(" "),
                 _vm.isInjured()
                   ? _c("th", [_vm._v("تاريخ الإصابة")])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.isInjured()
+                  ? _c("th", [_vm._v("عدد أيام الإصابة")])
                   : _vm._e(),
                 _vm._v(" "),
                 _c("th")
@@ -38260,7 +38374,7 @@ var render = function() {
                               {
                                 "bg-success":
                                   patient.status == "healthy" ? true : false,
-                                "bg-warning":
+                                "bg-warning text-dark":
                                   patient.status == "contact" ? true : false,
                                 "bg-danger":
                                   patient.status == "injured" ? true : false
@@ -38330,8 +38444,16 @@ var render = function() {
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(patient.area))]),
                       _vm._v(" "),
+                      _vm.isHealign()
+                        ? _c("td", [_vm._v(_vm._s(patient.date_healing))])
+                        : _vm._e(),
+                      _vm._v(" "),
                       _vm.isInjured()
                         ? _c("td", [_vm._v(_vm._s(patient.date_injury))])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.isInjured()
+                        ? _c("td", [_vm._v(_vm._s(patient.injury_days))])
                         : _vm._e(),
                       _vm._v(" "),
                       _c(

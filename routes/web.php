@@ -70,5 +70,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('dashboard/patient/getcontact', ['as' => '', 'uses' => 'PatientController@getcontact']);
     Route::get('dashboard/patient/getinjured', ['as' => '', 'uses' => 'PatientController@getinjured']);
 
+    Route::post('/patient/search', ['as' => '', 'uses' => 'PatientController@search']);
+
 });
 
