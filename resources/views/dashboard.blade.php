@@ -77,13 +77,13 @@
           <div class="card card-chart">
             <div class="card-header card-header-success">
               <div class="ct-chart" id="dailySalesChart">
-                  {{($healthy/($contact+ $healthy+ $injured))*100}}%
+                  {{round(($healthy/($contact+ $healthy+ $injured))*100, 2)}}%
               </div>
             </div>
             <div class="card-body">
               <h4 class="card-title">نسبة المتعافين</h4>
               <p class="card-category">
-                <span class="text-success">{{($healthy/($contact+ $healthy+ $injured))*100}}%</span>
+                <span class="text-success">{{round(($healthy/($contact+ $healthy+ $injured))*100, 2)}}%</span>
               </p>
             </div>
             <div class="card-footer">
@@ -97,13 +97,13 @@
           <div class="card card-chart">
             <div class="card-header card-header-warning">
               <div class="ct-chart" id="websiteViewsChart">
-                  {{($contact/($contact+ $healthy+ $injured))*100}}%
+                  {{round(($contact/($contact+ $healthy+ $injured))*100, 2)}}%
               </div>
             </div>
             <div class="card-body">
               <h4 class="card-title">نسبة المخالطين</h4>
               <p class="card-category">
-                  <span class="text-success">{{($contact/($contact+ $healthy+ $injured))*100}}%</span>
+                  <span class="text-success">{{round(($contact/($contact+ $healthy+ $injured))*100, 2)}}%</span>
               </p>
             </div>
             <div class="card-footer">
@@ -117,13 +117,13 @@
           <div class="card card-chart">
             <div class="card-header card-header-danger">
               <div class="ct-chart" id="completedTasksChart">
-                  {{($injured/($contact+ $healthy+ $injured))*100}}%
+                  {{round(($injured/($contact+ $healthy+ $injured))*100, 2)}}%
               </div>
             </div>
             <div class="card-body">
               <h4 class="card-title">نسبة المصابين</h4>
               <p class="card-category">
-                  <span class="text-success">{{str_shuffle(($injured/($contact+ $healthy+ $injured))*100)}}%</span>
+                  <span class="text-success">{{round(($injured/($contact+ $healthy+ $injured))*100, 2)}}%</span>
 
               </p>
             </div>
