@@ -2252,6 +2252,11 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (err) {
         console.log(err);
       });
+    },
+    goToContactMap: function goToContactMap(id) {
+      if (id) {
+        window.location.href = '/contact/map/' + id;
+      }
     }
   }
 });
@@ -38328,11 +38333,11 @@ var render = function() {
                 _vm._v(" "),
                 _vm.isHealign() ? _c("th", [_vm._v("تاريخ الشفاء")]) : _vm._e(),
                 _vm._v(" "),
-                _vm.isInjured()
+                _vm.isInjured() || _vm.isHealign()
                   ? _c("th", [_vm._v("تاريخ الإصابة")])
                   : _vm._e(),
                 _vm._v(" "),
-                _vm.isInjured()
+                _vm.isInjured() || _vm.isHealign()
                   ? _c("th", [_vm._v("عدد أيام الإصابة")])
                   : _vm._e(),
                 _vm._v(" "),
@@ -38348,22 +38353,48 @@ var render = function() {
                     [
                       _c("td", [_vm._v(_vm._s(patient.id))]),
                       _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(
-                            patient.first_name +
-                              " " +
-                              patient.father_name +
-                              " " +
-                              " " +
-                              patient.granddad_name +
-                              " " +
-                              patient.last_name
-                          )
-                        )
-                      ]),
+                      _c(
+                        "td",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.goToContactMap(patient.id)
+                            }
+                          }
+                        },
+                        [
+                          _c("a", { attrs: { href: "#" } }, [
+                            _vm._v(
+                              _vm._s(
+                                patient.first_name +
+                                  " " +
+                                  patient.father_name +
+                                  " " +
+                                  " " +
+                                  patient.granddad_name +
+                                  " " +
+                                  patient.last_name
+                              )
+                            )
+                          ])
+                        ]
+                      ),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(patient.id_number))]),
+                      _c(
+                        "td",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.goToContactMap(patient.id)
+                            }
+                          }
+                        },
+                        [
+                          _c("a", { attrs: { href: "#" } }, [
+                            _vm._v(_vm._s(patient.id_number))
+                          ])
+                        ]
+                      ),
                       _vm._v(" "),
                       _c("td", [
                         _c(
@@ -38448,11 +38479,11 @@ var render = function() {
                         ? _c("td", [_vm._v(_vm._s(patient.date_healing))])
                         : _vm._e(),
                       _vm._v(" "),
-                      _vm.isInjured()
+                      _vm.isInjured() || _vm.isHealign()
                         ? _c("td", [_vm._v(_vm._s(patient.date_injury))])
                         : _vm._e(),
                       _vm._v(" "),
-                      _vm.isInjured()
+                      _vm.isInjured() || _vm.isHealign()
                         ? _c("td", [_vm._v(_vm._s(patient.injury_days))])
                         : _vm._e(),
                       _vm._v(" "),

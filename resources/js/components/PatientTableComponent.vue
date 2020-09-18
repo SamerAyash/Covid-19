@@ -73,15 +73,15 @@
                         <th>المدينة</th>
                         <th>المنطقة</th>
                         <th v-if="isHealign()">تاريخ الشفاء</th>
-                        <th v-if="isInjured()">تاريخ الإصابة</th>
-                        <th v-if="isInjured()">عدد أيام الإصابة</th>
+                        <th v-if="isInjured() || isHealign()">تاريخ الإصابة</th>
+                        <th v-if="isInjured() || isHealign()">عدد أيام الإصابة</th>
                         <th></th>
                         </thead>
                         <tbody>
                         <tr v-for="patient in this.patients" :key="patient.id" :id="'patient'+patient.id">
                             <td>{{patient.id}}</td>
-                            <td>{{patient.first_name+' '+patient.father_name+' '+' '+ patient.granddad_name+ ' '+ patient.last_name}}</td>
-                            <td>{{patient.id_number}}</td>
+                            <td @click="goToContactMap(patient.id)"><a href="#">{{patient.first_name+' '+patient.father_name+' '+' '+ patient.granddad_name+ ' '+ patient.last_name}}</a></td>
+                            <td @click="goToContactMap(patient.id)"><a href="#">{{patient.id_number}}</a></td>
                             <td>
                                 <select class="form-control text-white" data-style="btn btn-link"
                                         :class="[{'bg-success':patient.status=='healthy'?true:false ,
@@ -102,8 +102,8 @@
                             <td>{{patient.city}}</td>
                             <td>{{patient.area}}</td>
                             <td v-if="isHealign()">{{patient.date_healing}}</td>
-                            <td v-if="isInjured()">{{patient.date_injury}}</td>
-                            <td v-if="isInjured()">{{patient.injury_days}}</td>
+                            <td v-if="isInjured() || isHealign()">{{patient.date_injury}}</td>
+                            <td v-if="isInjured() || isHealign()">{{patient.injury_days}}</td>
                             <td class="td-actions d-flex justify-content-between">
                                 <!--<button type="button" rel="tooltip" title="Edit Task"
                                         @click="edit(patient)"
@@ -316,6 +316,11 @@ export default {
             .catch(err=>{
                 console.log(err);
             })
+        },
+        goToContactMap(id){
+            if (id){
+                window.location.href='/contact/map/'+id;
+            }
         }
 
     }

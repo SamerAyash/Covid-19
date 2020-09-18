@@ -4,7 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b8251f15-8d8c-4d29-b3b4-77c3420d5f4c" name="Default Changelist" comment="" />
+    <list default="true" id="b8251f15-8d8c-4d29-b3b4-77c3420d5f4c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/Console/Commands/injuryDays.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/ContactMapController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Models/ContactMap.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/factories/ContactMapFactory.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_09_16_212352_create_contact_maps_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/seeds/ContactMapSeeder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/patient/contact_map.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Console/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Kernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/patient.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/patient.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_09_10_234412_create_patients_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_09_10_234412_create_patients_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/PatientTableComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/PatientTableComponent.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/patient/add_patient.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -22,6 +39,9 @@
         <option value="Vue Single File Component" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -136,11 +156,15 @@
     </include_path>
   </component>
   <component name="ProjectId" id="1hL6NbOo1mmK2zClLiY5Bvqlytw" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -170,22 +194,40 @@
       <workItem from="1599826536917" duration="29925000" />
       <workItem from="1599894351390" duration="714000" />
       <workItem from="1599922863287" duration="6581000" />
-      <workItem from="1599947306461" duration="9879000" />
+      <workItem from="1599947306461" duration="10988000" />
+      <workItem from="1599983065358" duration="61000" />
+      <workItem from="1599987073836" duration="791000" />
+      <workItem from="1600003674121" duration="200000" />
+      <workItem from="1600195833277" duration="10563000" />
+      <workItem from="1600240948569" duration="28000" />
+      <workItem from="1600274832266" duration="13436000" />
+      <workItem from="1600327139574" duration="136000" />
+      <workItem from="1600327925670" duration="93000" />
+      <workItem from="1600334486827" duration="210000" />
+      <workItem from="1600432912265" duration="5660000" />
+      <workItem from="1600444134665" duration="1162000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
   <component name="WindowStateProjectService">
+    <state x="413" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1600438109232">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="413" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1600438109232" />
     <state x="461" y="276" key="ComposerInitDialogKey" timestamp="1599779299117">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="461" y="276" key="ComposerInitDialogKey/0.0.1366.728@0.0.1366.728" timestamp="1599779299117" />
-    <state x="463" y="118" key="FileChooserDialogImpl" timestamp="1599895053649">
+    <state x="463" y="118" key="FileChooserDialogImpl" timestamp="1600327272841">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1599895053649" />
+    <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1600327272841" />
     <state width="1323" height="195" key="GridCell.Tab.0.bottom" timestamp="1599786940505">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -206,9 +248,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="389" y="97" width="617" height="534" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1599837350996" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1599958419382">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1600438145066">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1599958419382" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1600438145066" />
   </component>
 </project>
