@@ -26,8 +26,9 @@ class CreatePatientsTable extends Migration
             $table->string('city');
             $table->string('area');
             $table->date('date_injury')->nullable();
-            $table->date('injury_days')->nullable();
+            $table->integer('injury_days')->default(0);
             $table->date('date_healing')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
