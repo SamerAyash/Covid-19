@@ -57,9 +57,23 @@
                         <!--<button class="btn btn-primary" type="submit" v-if="patient.id">تعديل</button>
                         <button class="btn btn-primary" @click="removeForm()" v-if="patient.id">إلغاء</button>-->
                     </form>
+                    <div v-if="!(isInjured() || isHealign())" class="d-flex justify-content-start">
+                        <div class="w-25">
+                            <input type="text"  v-model="contactedId" @input="autoComplete" class="form-control" placeholder="الرقم الشخصي للمختلط به">
+                            <div class="panel-footer" v-if="results.length">
+                                <ul class="list-group" v-if="modal && contactedId.length">
+                                    <li class="list-group-item" @focus="modal=true"  v-for="result in results" @click="setContactedId(result)">{{ result}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="w-25 mx-2">
+                            <input type="text"  v-model="place" class="form-control" placeholder="مكان المخالطة">
+
+                        </div>
+                    </div>
                     <div  class="form-group float-left w-25">
                         <label for="exampleInputEmail1">البحث</label>
-                        <input type="text" @change="search()" class="form-control" id="exampleInputEmail1"
+                        <input type="text" @input="search()" class="form-control" id="exampleInputEmail1"
                                v-model="searchID"  placeholder="أدخل رقم البطاقة الشخصية">
                     </div>
                     <table class="table table-hover">
@@ -161,7 +175,11 @@ export default {
                 },
             searchID:'',
             links:[],
-            last_update:''
+            last_update:'',
+            contactedId: '',
+            results: [],
+            modal:false,
+            place:null,
         }
     },
     mounted() {
@@ -169,6 +187,20 @@ export default {
             this.check();
     },
     methods:{
+        autoComplete(){
+
+            this.results = [];
+
+            if(this.contactedId.length > 0){
+                axios.get('/patient/autocomplete/search',{params: {contactedId: this.contactedId}}).then(response => {
+                    this.modal=true;
+                    this.results = response.data.filter(item => this.contactedId.toLowerCase().indexOf(this.contactedId) > -1);;
+
+                });
+
+            }
+
+        },
         check(){
             if(this.$props.route == '/dashboard/patient/gethealthy'){
                  this.patient.status = 'healthy';
@@ -276,6 +308,8 @@ export default {
                 city:this.patient.city,
                 area:this.patient.area,
                 date_injury :this.patient.date_injury,
+                contactedId:this.contactedId,
+                place:this.place,
             })
             .then(res=>{
                 Swal.fire(
@@ -287,6 +321,8 @@ export default {
                 this.patient= {
                     status: this.check()
                 };
+                this.contactedId=null;
+                this.place=null;
             })
         },
         isInjured(){
@@ -321,6 +357,10 @@ export default {
             if (id){
                 window.location.href='/contact/map/'+id;
             }
+        },
+        setContactedId(id_number){
+            this.contactedId = id_number;
+            this.modal=false;
         }
 
     }

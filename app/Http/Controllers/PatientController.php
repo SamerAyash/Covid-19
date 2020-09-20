@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ContactMap;
 use App\Models\patient;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -17,7 +18,9 @@ class PatientController extends Controller
     {
         $patients= patient::orderByDesc('updated_at')->paginate(15);
         $last_update =patient::orderByDesc('updated_at')->first()->updated_at->format('d M Y - H:i');
-
+        $patients->each(function ($p){
+            $p['injury_days'] = Carbon::parse($p->date_injury)->diffInDays(Carbon::parse(today()));
+        });
         return response()->json([
             'patients'=>$patients,
             'last_update'=>$last_update
@@ -76,7 +79,9 @@ class PatientController extends Controller
 
         $patients= patient::where('status','injured')->orderByDesc('date_injury')->paginate(15);
         $last_update =patient::where('status','injured')->orderByDesc('date_injury')->first()->updated_at->format('d M Y - H:i');
-
+        $patients->each(function ($p){
+            $p['injury_days'] = Carbon::parse($p->date_injury)->diffInDays(Carbon::parse(today()));
+        });
         return response()->json([
             'patients'=>$patients,
             'last_update'=>$last_update
@@ -120,6 +125,19 @@ class PatientController extends Controller
             $patient->area=$request->area;
             $patient->date_injury=$request->date_injury ?$request->date_injury:null;
             $patient->save();
+            if($request->status == 'contact' && $request->contactedId){
+                $pat=patient::where('id_number',$request->contactedId)->first();
+                if (!is_null($pat)){
+                    $contactMap=new ContactMap();
+                    $contactMap->contact_id=$patient->id;
+                    $contactMap->contact_with_id=$pat->id;
+                    $contactMap->place = $request->place;
+                    $contactMap->date= today();
+                    $contactMap->recognition_method=1;
+                    $contactMap->save();
+                }
+
+            }
         return response()->json(true,200);
     }
 
@@ -216,5 +234,13 @@ class PatientController extends Controller
         return response()->json([
             'patients'=>$patients,
         ],200);
+    }
+
+    // Autocomplete for add patient id is contacted with it in contact table
+    public function searchId(Request $request)
+    {
+        $patients = patient::where('id_number','like',$request->search.'%')->pluck('id_number');
+
+        return response()->json($patients);
     }
 }
