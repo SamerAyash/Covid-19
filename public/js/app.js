@@ -2079,6 +2079,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PatientTableComponent",
   props: ['route'],
@@ -2101,7 +2115,11 @@ __webpack_require__.r(__webpack_exports__);
       },
       searchID: '',
       links: [],
-      last_update: ''
+      last_update: '',
+      contactedId: '',
+      results: [],
+      modal: false,
+      place: null
     };
   },
   mounted: function mounted() {
@@ -2109,6 +2127,25 @@ __webpack_require__.r(__webpack_exports__);
     this.check();
   },
   methods: {
+    autoComplete: function autoComplete() {
+      var _this = this;
+
+      this.results = [];
+
+      if (this.contactedId.length > 0) {
+        axios.get('/patient/autocomplete/search', {
+          params: {
+            contactedId: this.contactedId
+          }
+        }).then(function (response) {
+          _this.modal = true;
+          _this.results = response.data.filter(function (item) {
+            return _this.contactedId.toLowerCase().indexOf(_this.contactedId) > -1;
+          });
+          ;
+        });
+      }
+    },
     check: function check() {
       if (this.$props.route == '/dashboard/patient/gethealthy') {
         this.patient.status = 'healthy';
@@ -2122,20 +2159,20 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     getPatient: function getPatient() {
-      var _this = this;
+      var _this2 = this;
 
       var url = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.$props.route;
       axios.get(url).then(function (res) {
-        _this.patients = res.data.patients.data;
-        _this.last_update = res.data.last_update;
-        _this.links = res.data.patients.links;
+        _this2.patients = res.data.patients.data;
+        _this2.last_update = res.data.last_update;
+        _this2.links = res.data.patients.links;
       })["catch"](function (err) {
         console.log(err);
       });
     },
     closeModal: function closeModal() {},
     deletePatient: function deletePatient(id, name) {
-      var _this2 = this;
+      var _this3 = this;
 
       Swal.fire({
         title: 'هل أنت متأكد؟',
@@ -2150,11 +2187,11 @@ __webpack_require__.r(__webpack_exports__);
 
         if (result.value) {
           axios["delete"]('/patient/' + id).then(function (res) {
-            console.log(_this2.patients.indexOf(function (x) {
+            console.log(_this3.patients.indexOf(function (x) {
               x.id === id;
             }));
 
-            _this2.patients.splice(_this2.patients.map(function (el) {
+            _this3.patients.splice(_this3.patients.map(function (el) {
               return el.id;
             }).indexOf(id), 1);
 
@@ -2166,14 +2203,14 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     onChange: function onChange(id, event) {
-      var _this3 = this;
+      var _this4 = this;
 
       status = event.target.value;
       axios.put('/patient/' + id, {
         status: status
       }).then(function (res) {
-        if (_this3.$props.route == '/patient') {
-          var patient = _this3.patients.find(function (el) {
+        if (_this4.$props.route == '/patient') {
+          var patient = _this4.patients.find(function (el) {
             return el.id === id;
           });
 
@@ -2186,7 +2223,7 @@ __webpack_require__.r(__webpack_exports__);
             patient.date_healing = res.data.date;
           }
         } else {
-          _this3.patients.splice(_this3.patients.map(function (el) {
+          _this4.patients.splice(_this4.patients.map(function (el) {
             return el.id;
           }).indexOf(id), 1);
         }
@@ -2203,7 +2240,7 @@ __webpack_require__.r(__webpack_exports__);
       this.patient = [];
     },
     save: function save() {
-      var _this4 = this;
+      var _this5 = this;
 
       axios.post('/patient', {
         first_name: this.patient.first_name,
@@ -2216,15 +2253,19 @@ __webpack_require__.r(__webpack_exports__);
         status: this.patient.status,
         city: this.patient.city,
         area: this.patient.area,
-        date_injury: this.patient.date_injury
+        date_injury: this.patient.date_injury,
+        contactedId: this.contactedId,
+        place: this.place
       }).then(function (res) {
         Swal.fire('إضافة حالة جديدة !', 'تم إضافة الحالة بنحاج.', 'success');
 
-        _this4.getPatient();
+        _this5.getPatient();
 
-        _this4.patient = {
-          status: _this4.check()
+        _this5.patient = {
+          status: _this5.check()
         };
+        _this5.contactedId = null;
+        _this5.place = null;
       });
     },
     isInjured: function isInjured() {
@@ -2241,14 +2282,14 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     search: function search() {
-      var _this5 = this;
+      var _this6 = this;
 
       axios.post('/patient/search', {
         status: this.patient.status,
         id: this.searchID
       }).then(function (res) {
-        _this5.patients = res.data.patients.data;
-        _this5.links = res.data.patients.links;
+        _this6.patients = res.data.patients.data;
+        _this6.links = res.data.patients.links;
       })["catch"](function (err) {
         console.log(err);
       });
@@ -2257,6 +2298,10 @@ __webpack_require__.r(__webpack_exports__);
       if (id) {
         window.location.href = '/contact/map/' + id;
       }
+    },
+    setContactedId: function setContactedId(id_number) {
+      this.contactedId = id_number;
+      this.modal = false;
     }
   }
 });
@@ -38278,6 +38323,93 @@ var render = function() {
                 )
               : _vm._e(),
             _vm._v(" "),
+            !(_vm.isInjured() || _vm.isHealign())
+              ? _c("div", { staticClass: "d-flex justify-content-start" }, [
+                  _c("div", { staticClass: "w-25" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.contactedId,
+                          expression: "contactedId"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        placeholder: "الرقم الشخصي للمختلط به"
+                      },
+                      domProps: { value: _vm.contactedId },
+                      on: {
+                        input: [
+                          function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.contactedId = $event.target.value
+                          },
+                          _vm.autoComplete
+                        ]
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.results.length
+                      ? _c("div", { staticClass: "panel-footer" }, [
+                          _vm.modal && _vm.contactedId.length
+                            ? _c(
+                                "ul",
+                                { staticClass: "list-group" },
+                                _vm._l(_vm.results, function(result) {
+                                  return _c(
+                                    "li",
+                                    {
+                                      staticClass: "list-group-item",
+                                      on: {
+                                        focus: function($event) {
+                                          _vm.modal = true
+                                        },
+                                        click: function($event) {
+                                          return _vm.setContactedId(result)
+                                        }
+                                      }
+                                    },
+                                    [_vm._v(_vm._s(result))]
+                                  )
+                                }),
+                                0
+                              )
+                            : _vm._e()
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "w-25 mx-2" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.place,
+                          expression: "place"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text", placeholder: "مكان المخالطة" },
+                      domProps: { value: _vm.place },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.place = $event.target.value
+                        }
+                      }
+                    })
+                  ])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
             _c("div", { staticClass: "form-group float-left w-25" }, [
               _c("label", { attrs: { for: "exampleInputEmail1" } }, [
                 _vm._v("البحث")
@@ -38300,15 +38432,17 @@ var render = function() {
                 },
                 domProps: { value: _vm.searchID },
                 on: {
-                  change: function($event) {
-                    return _vm.search()
-                  },
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+                  input: [
+                    function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.searchID = $event.target.value
+                    },
+                    function($event) {
+                      return _vm.search()
                     }
-                    _vm.searchID = $event.target.value
-                  }
+                  ]
                 }
               })
             ]),

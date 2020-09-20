@@ -72,6 +72,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/patient/search', ['as' => '', 'uses' => 'PatientController@search']);
     Route::get('/contact/map/{id}', ['as' => 'contact.map', 'uses' => 'ContactMapController@show']);
+    Route::get('/patient/autocomplete/search', ['as' => '', 'uses' => 'PatientController@searchId']);
 
 });
 

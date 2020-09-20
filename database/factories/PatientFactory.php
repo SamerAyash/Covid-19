@@ -24,7 +24,7 @@ class patientFactory extends Factory
     {
         return [
             'status' => $this->faker->randomElement(['healthy','injured ','contact']),
-            'id_number' => $this->faker->unique()->uuid,
+            'id_number' => $this->faker->unique()->numberBetween(1020304050,2020304050),
             'first_name' => $this->faker->firstName,
             'father_name' => $this->faker->firstName,
             'granddad_name' => $this->faker->firstName,
