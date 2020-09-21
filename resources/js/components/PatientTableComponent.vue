@@ -86,9 +86,9 @@
                         <th>رقم المحمول(الهاتف)</th>
                         <th>المدينة</th>
                         <th>المنطقة</th>
-                        <th v-if="isHealign()">تاريخ الشفاء</th>
                         <th v-if="isInjured() || isHealign()">تاريخ الإصابة</th>
-                        <th v-if="isInjured() || isHealign()">عدد أيام الإصابة</th>
+                        <th v-if="isHealign()">تاريخ الشفاء</th>
+                        <th v-if="isInjured() ">عدد أيام الإصابة</th>
                         <th></th>
                         </thead>
                         <tbody>
@@ -115,9 +115,9 @@
                             <td>{{patient.phone}}</td>
                             <td>{{patient.city}}</td>
                             <td>{{patient.area}}</td>
-                            <td v-if="isHealign()">{{patient.date_healing}}</td>
                             <td v-if="isInjured() || isHealign()">{{patient.date_injury}}</td>
-                            <td v-if="isInjured() || isHealign()">{{patient.injury_days}}</td>
+                            <td v-if="isHealign()">{{patient.date_healing}}</td>
+                            <td v-if="isInjured()">{{patient.injury_days}}</td>
                             <td class="td-actions d-flex justify-content-between">
                                 <!--<button type="button" rel="tooltip" title="Edit Task"
                                         @click="edit(patient)"
@@ -321,7 +321,8 @@ export default {
                 this.patient= {
                     status: this.check()
                 };
-                this.contactedId=null;
+                this.contactedId='';
+                this.results=[];
                 this.place=null;
             })
         },

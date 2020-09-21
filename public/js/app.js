@@ -2264,7 +2264,8 @@ __webpack_require__.r(__webpack_exports__);
         _this5.patient = {
           status: _this5.check()
         };
-        _this5.contactedId = null;
+        _this5.contactedId = '';
+        _this5.results = [];
         _this5.place = null;
       });
     },
@@ -38465,13 +38466,13 @@ var render = function() {
                 _vm._v(" "),
                 _c("th", [_vm._v("المنطقة")]),
                 _vm._v(" "),
-                _vm.isHealign() ? _c("th", [_vm._v("تاريخ الشفاء")]) : _vm._e(),
-                _vm._v(" "),
                 _vm.isInjured() || _vm.isHealign()
                   ? _c("th", [_vm._v("تاريخ الإصابة")])
                   : _vm._e(),
                 _vm._v(" "),
-                _vm.isInjured() || _vm.isHealign()
+                _vm.isHealign() ? _c("th", [_vm._v("تاريخ الشفاء")]) : _vm._e(),
+                _vm._v(" "),
+                _vm.isInjured()
                   ? _c("th", [_vm._v("عدد أيام الإصابة")])
                   : _vm._e(),
                 _vm._v(" "),
@@ -38609,15 +38610,15 @@ var render = function() {
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(patient.area))]),
                       _vm._v(" "),
-                      _vm.isHealign()
-                        ? _c("td", [_vm._v(_vm._s(patient.date_healing))])
-                        : _vm._e(),
-                      _vm._v(" "),
                       _vm.isInjured() || _vm.isHealign()
                         ? _c("td", [_vm._v(_vm._s(patient.date_injury))])
                         : _vm._e(),
                       _vm._v(" "),
-                      _vm.isInjured() || _vm.isHealign()
+                      _vm.isHealign()
+                        ? _c("td", [_vm._v(_vm._s(patient.date_healing))])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.isInjured()
                         ? _c("td", [_vm._v(_vm._s(patient.injury_days))])
                         : _vm._e(),
                       _vm._v(" "),
