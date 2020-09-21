@@ -34,7 +34,7 @@
                         </ul>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">تاريخ الإصابة: {{$patient->date_injury}}</li>
-                            <li class="list-group-item">عدد أيام الإصابة: {{$patient->injury_days}}</li>
+                            <li class="list-group-item">عدد أيام الإصابة: {{\Carbon\Carbon::parse($patient->date_injury)->diffInDays(\Carbon\Carbon::parse(today()))}}</li>
                         </ul>
                     </div>
                 </div>

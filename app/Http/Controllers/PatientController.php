@@ -6,6 +6,7 @@ use App\Models\ContactMap;
 use App\Models\patient;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\Types\Object_;
 
 class PatientController extends Controller
 {
@@ -126,16 +127,26 @@ class PatientController extends Controller
             $patient->date_injury=$request->date_injury ?$request->date_injury:null;
             $patient->save();
             if($request->status == 'contact' && $request->contactedId){
+                $p=new Object_();
                 $pat=patient::where('id_number',$request->contactedId)->first();
                 if (!is_null($pat)){
-                    $contactMap=new ContactMap();
-                    $contactMap->contact_id=$patient->id;
-                    $contactMap->contact_with_id=$pat->id;
-                    $contactMap->place = $request->place;
-                    $contactMap->date= today();
-                    $contactMap->recognition_method=1;
-                    $contactMap->save();
+                    $p=$pat;
                 }
+                else{
+                    $Newpatient=new patient();
+                    $Newpatient->id_number=$request->contactedId;
+                    $Newpatient->gender='male';
+                    $Newpatient->status='contact';
+                    $Newpatient->save();
+                    $p=$Newpatient;
+                }
+                $contactMap=new ContactMap();
+                $contactMap->contact_id=$patient->id;
+                $contactMap->contact_with_id=$p->id;
+                $contactMap->place = $request->place;
+                $contactMap->date= today();
+                $contactMap->recognition_method=1;
+                $contactMap->save();
 
             }
         return response()->json(true,200);
