@@ -2285,10 +2285,7 @@ __webpack_require__.r(__webpack_exports__);
     search: function search() {
       var _this6 = this;
 
-      axios.post('/patient/search', {
-        status: this.patient.status,
-        id: this.searchID
-      }).then(function (res) {
+      axios.get('/patient/search/' + this.patient.status + '/' + this.searchID).then(function (res) {
         _this6.patients = res.data.patients.data;
         _this6.links = res.data.patients.links;
       })["catch"](function (err) {
@@ -2303,6 +2300,123 @@ __webpack_require__.r(__webpack_exports__);
     setContactedId: function setContactedId(id_number) {
       this.contactedId = id_number;
       this.modal = false;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/placeTableComponent.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/placeTableComponent.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "placeTableComponent",
+  data: function data() {
+    return {
+      places: null,
+      links: null,
+      search: null
+    };
+  },
+  mounted: function mounted() {
+    this.getplaces();
+  },
+  methods: {
+    getplaces: function getplaces() {
+      var _this = this;
+
+      var url = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '/dashboard/get_places';
+      axios.get(url).then(function (res) {
+        console.log(res);
+        _this.places = res.data.data;
+        _this.links = res.data.links;
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    searchMethod: function searchMethod() {
+      var _this2 = this;
+
+      axios.get('/dashboard/place/search/' + this.search).then(function (res) {
+        _this2.places = res.data.data;
+        _this2.links = res.data.links;
+      })["catch"](function (err) {
+        console.log(err);
+      });
     }
   }
 });
@@ -38719,6 +38833,207 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/placeTableComponent.vue?vue&type=template&id=54f5f0bb&scoped=true&":
+/*!**********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/placeTableComponent.vue?vue&type=template&id=54f5f0bb&scoped=true& ***!
+  \**********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-12" }, [
+        _c("div", { staticClass: "card" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body table-responsive" }, [
+            _c("div", { staticClass: "form-group float-left w-25" }, [
+              _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                _vm._v("البحث")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.search,
+                    expression: "search"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  id: "exampleInputEmail1",
+                  placeholder: "رقم الهوية أو اسم المكان"
+                },
+                domProps: { value: _vm.search },
+                on: {
+                  input: [
+                    function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.search = $event.target.value
+                    },
+                    function($event) {
+                      return _vm.searchMethod()
+                    }
+                  ]
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("table", { staticClass: "table" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(_vm.places, function(place) {
+                  return _c("tr", { key: place.id }, [
+                    _c("td", [_vm._v(_vm._s(place.id))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(place.place))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(place.category))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(place.city))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(place.area))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(place.street))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(place.name))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(place.id_number))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(place.phone))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(place.created_at))]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c(
+                        "a",
+                        { attrs: { href: "/dashboard/place/qr/" + place.id } },
+                        [
+                          _c("button", { staticClass: "btn btn-info" }, [
+                            _vm._v("عرض")
+                          ])
+                        ]
+                      )
+                    ])
+                  ])
+                }),
+                0
+              )
+            ]),
+            _vm._v(" "),
+            _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
+              _c(
+                "ul",
+                { staticClass: "pagination" },
+                _vm._l(_vm.links, function(link) {
+                  return _c(
+                    "li",
+                    {
+                      key: link.label,
+                      staticClass: "page-item",
+                      class: link.active ? "active" : ""
+                    },
+                    [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "page-link",
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              return _vm.getplaces(link.url)
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                                    " +
+                              _vm._s(link.label) +
+                              "\n                                    "
+                          ),
+                          _c("span", { staticClass: "sr-only" }, [
+                            _vm._v(
+                              _vm._s(link.active ? "(current)" : "") +
+                                "\n                                "
+                            )
+                          ])
+                        ]
+                      )
+                    ]
+                  )
+                }),
+                0
+              )
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header card-header-primary" }, [
+      _c("h4", { staticClass: "card-title" }, [_vm._v("الأماكن و المحلات")]),
+      _vm._v(" "),
+      _c("p", { staticClass: "card-category" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("المكان")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("نوع المكان")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("المدينة")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("الحي")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("الشارع")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("صاحب المكان")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("رقم الهوية")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("رقم التواصل")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("تاريخ التسجيل")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("رمز QR")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js":
 /*!********************************************************************!*\
   !*** ./node_modules/vue-loader/lib/runtime/componentNormalizer.js ***!
@@ -50908,6 +51223,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
 Vue.component('patient-table-component', __webpack_require__(/*! ./components/PatientTableComponent.vue */ "./resources/js/components/PatientTableComponent.vue")["default"]);
+Vue.component('place-table-component', __webpack_require__(/*! ./components/placeTableComponent */ "./resources/js/components/placeTableComponent.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -51098,6 +51414,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PatientTableComponent_vue_vue_type_template_id_7146f7d9_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PatientTableComponent_vue_vue_type_template_id_7146f7d9_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/placeTableComponent.vue":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/placeTableComponent.vue ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _placeTableComponent_vue_vue_type_template_id_54f5f0bb_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./placeTableComponent.vue?vue&type=template&id=54f5f0bb&scoped=true& */ "./resources/js/components/placeTableComponent.vue?vue&type=template&id=54f5f0bb&scoped=true&");
+/* harmony import */ var _placeTableComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./placeTableComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/placeTableComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _placeTableComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _placeTableComponent_vue_vue_type_template_id_54f5f0bb_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _placeTableComponent_vue_vue_type_template_id_54f5f0bb_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "54f5f0bb",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/placeTableComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/placeTableComponent.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/placeTableComponent.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_placeTableComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./placeTableComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/placeTableComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_placeTableComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/placeTableComponent.vue?vue&type=template&id=54f5f0bb&scoped=true&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/js/components/placeTableComponent.vue?vue&type=template&id=54f5f0bb&scoped=true& ***!
+  \****************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_placeTableComponent_vue_vue_type_template_id_54f5f0bb_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./placeTableComponent.vue?vue&type=template&id=54f5f0bb&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/placeTableComponent.vue?vue&type=template&id=54f5f0bb&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_placeTableComponent_vue_vue_type_template_id_54f5f0bb_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_placeTableComponent_vue_vue_type_template_id_54f5f0bb_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
