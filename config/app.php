@@ -175,7 +175,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         ///////////////////////////////////
-        LaravelFrontendPresets\MaterialPreset\MaterialPresetServiceProvider::class
+        LaravelFrontendPresets\MaterialPreset\MaterialPresetServiceProvider::class,
+	    SimpleSoftwareIO\QrCode\ServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 
@@ -228,6 +230,9 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'QrCode' => SimpleSoftwareIO\QrCode\Facade\QrCode::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
+
 
     ],
 

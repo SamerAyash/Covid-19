@@ -15,9 +15,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('main_page');
 
-Auth::routes();
+Auth::routes(['register' => false]);
+
+Route::post('/generate/qrcode',['as'=>'genQr','uses'=>'PlaceHolderController@store']);
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home',[
@@ -25,7 +27,7 @@ Route::group(['middleware' => 'auth'], function () {
         'as'=>'home',
 
     ]);
-	Route::get('table-list', function () {
+/*	Route::get('table-list', function () {
 		return view('pages.table_list');
 	})->name('table');
 
@@ -51,7 +53,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('upgrade', function () {
 		return view('pages.upgrade');
-	})->name('upgrade');
+	})->name('upgrade');*/
 });
 
 Route::group(['middleware' => 'auth'], function () {
@@ -59,6 +61,11 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
+
+    Route::get('dashboard/places-table', ['as' => 'place_table', 'uses' => 'PlaceHolderController@index']);
+    Route::get('dashboard/get_places', ['as' => '', 'uses' => 'PlaceHolderController@getPlaces']);
+    Route::get('/dashboard/place/search/{search}', ['as' => '', 'uses' => 'PlaceHolderController@search']);
+    Route::get('/dashboard/place/qr/{id}', ['as' => '', 'uses' => 'PlaceHolderController@getQrcode']);
 
 	Route::resource('patient','PatientController');
     Route::get('dashboard/patients-all', ['as' => 'patients', 'uses' => 'PatientController@patients']);
@@ -70,7 +77,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('dashboard/patient/getcontact', ['as' => '', 'uses' => 'PatientController@getcontact']);
     Route::get('dashboard/patient/getinjured', ['as' => '', 'uses' => 'PatientController@getinjured']);
 
-    Route::post('/patient/search', ['as' => '', 'uses' => 'PatientController@search']);
+    Route::get('/patient/search/{status}/{id}', ['as' => '', 'uses' => 'PatientController@search']);
     Route::get('/contact/map/{id}', ['as' => 'contact.map', 'uses' => 'ContactMapController@show']);
     Route::get('/patient/autocomplete/search', ['as' => '', 'uses' => 'PatientController@searchId']);
 

@@ -21,6 +21,7 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('patient-table-component', require('./components/PatientTableComponent.vue').default);
+Vue.component('place-table-component', require('./components/placeTableComponent').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

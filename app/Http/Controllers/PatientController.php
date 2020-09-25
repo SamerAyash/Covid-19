@@ -224,23 +224,23 @@ class PatientController extends Controller
         $result=$patient->delete();
         return response()->json($result,200);
     }
-    public function search(Request $request){
+    public function search($status,$id){
 
         $patients=null;
-        if ($request->status == 'healthy'){
-            $patients= patient::where('status','healthy')->where('id_number', 'LIKE', '%' . $request->id . '%')->orderByDesc('updated_at')->paginate(15);
+        if ($status == 'healthy'){
+            $patients= patient::where('status','healthy')->where('id_number', 'LIKE', '%' . $id . '%')->orderByDesc('updated_at')->paginate(15);
 
         }
-        else if ($request->status == 'contact'){
-            $patients= patient::where('status','contact')->where('id_number', 'LIKE', '%' . $request->id . '%')->orderByDesc('updated_at')->paginate(15);
+        else if ($status == 'contact'){
+            $patients= patient::where('status','contact')->where('id_number', 'LIKE', '%' . $id . '%')->orderByDesc('updated_at')->paginate(15);
 
         }
-        else if ($request->status == 'injured'){
-            $patients= patient::where('status','injured')->where('id_number', 'LIKE', '%' . $request->id . '%')->orderByDesc('date_injury')->paginate(15);
+        else if ($status == 'injured'){
+            $patients= patient::where('status','injured')->where('id_number', 'LIKE', '%' . $id . '%')->orderByDesc('date_injury')->paginate(15);
 
         }
         else{
-            $patients= patient::orderByDesc('updated_at')->where('id_number', 'LIKE', '%' . $request->id . '%')->paginate(15);
+            $patients= patient::orderByDesc('updated_at')->where('id_number', 'LIKE', '%' . $id . '%')->paginate(15);
         }
         return response()->json([
             'patients'=>$patients,

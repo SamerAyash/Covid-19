@@ -41,6 +41,12 @@
             <p>إدارة المصابين</p>
         </a>
       </li>
+        <li class="nav-item{{ $activePage == 'place table' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('place_table') }}">
+          <i class="material-icons text-danger">place</i>
+            <p>الأماكن و المحلات</p>
+        </a>
+      </li>
     </ul>
   </div>
 </div>

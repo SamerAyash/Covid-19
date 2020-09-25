@@ -342,10 +342,7 @@ export default {
             }
         },
         search(){
-            axios.post('/patient/search',{
-                status:this.patient.status,
-                id:this.searchID,
-            })
+            axios.get('/patient/search/'+this.patient.status+'/'+this.searchID)
             .then(res=>{
                 this.patients=res.data.patients.data;
                 this.links=res.data.patients.links;
