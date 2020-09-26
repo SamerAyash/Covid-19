@@ -7,7 +7,7 @@
             <div class="container row">
                 <div class="col-12 col-sm-6">
                     <div>
-                        {!! \QrCode::size(400)
+                        {!! \QrCode::size(300)
                     ->encoding('UTF-8')
                     ->gradient(250, 0, 180, 100,50, 150, 'vertical')
                     ->generate('110000000'.$id.','.$placee)
@@ -19,14 +19,14 @@
                 </div>
                 <div class="col-12 col-sm-6">
                     <div>
-                        {!! \QrCode::size(400)
+                        {!! \QrCode::size(300)
                     ->encoding('UTF-8')
                     ->gradient(250, 0, 180, 100,50, 150, 'vertical')
                     ->generate('120000000'.$id.','.$placee)
                      !!}
                     </div>
                     <div>
-                        <button class="btn btn-success">تنزيل رمز تسجيل خروج</button>
+                        <button class="btn btn-danger">تنزيل رمز تسجيل خروج</button>
                     </div>
                 </div>
             </div>
