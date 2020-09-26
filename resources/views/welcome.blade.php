@@ -36,11 +36,13 @@
                                               <select class="form-control " name="category" id="exampleFormControlSelect1">
                                                   <option disabled selected class="text-muted">تصنيف المكان</option>
                                                   <option value="حكومي">حكومي</option>
+                                                  <option value="سياحي">سياحي</option>
                                                   <option value="تعليمي">تعليمي</option>
                                                   <option value="تجاري">تجاري</option>
                                                   <option value="ترفيهي">ترفيهي</option>
                                                   <option value="رياضي">رياضي</option>
                                                   <option value="مواصلات">مواصلات</option>
+                                                   <option value="أخرى">أخرى</option>
                                               </select>
                                               @if ($errors->has('category'))
                                                   <div id="email-error" class="error text-danger pl-3" style="display: block;">
