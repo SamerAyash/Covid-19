@@ -128,17 +128,12 @@
               </div>
               <div class="col-6 d-flex flex-column justify-content-center align-items-center">
                   <h3>للمستخدمين تنزيل التطبيق</h3>
-                  <h4>حمل التطبيق الآن من خلال متجر جوجل بلاي أو من خلال باركود</h4>
-                  <button type="button" class="btn btn-success w-75">
-                      <a href="https://play.google.com/store/apps/details?id=com.facebook.orca&hl=ar" target="_blank">
-                          <b class="text-white">
-                              <h4>
-                                  <i class="material-icons text-white">android</i>
-                                  حمل الآن
-                              </h4>
-                          </b>
-                      </a>
-                  </button>
+                  <h4>حمل التطبيق الآن من خلال المتاجر الالكترونية أو من خلال باركود</h4>
+                  <div class="text-center d-flex justify-content-start">
+                      <a href="https://play.google.com/store/apps/details?id=com.facebook.katana&hl=ar" class="m-2" target="_blank" rel="noopener noreferrer" style="border:none;text-decoration:none"><img height="40px" src="https://www.niftybuttons.com/googleplay/googleplay-button8.png"></a>
+                      <br>
+                      <a href="https://apps.apple.com/us/app/facebook/id284882215" class="m-2" target="_blank" rel="noopener noreferrer" style="border:none;text-decoration:none"><img height="40px" src="https://www.niftybuttons.com/itunes/itunesbutton6.png"></a>
+                  </div>
                   <div class="mt-3">
                       {!! \QrCode::size(250)
                         ->gradient(250, 0, 180, 100,50, 150, 'vertical')
