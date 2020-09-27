@@ -125,9 +125,10 @@
                                   </div>
                               </form>
                              </div>
+
               </div>
               <div class="col-6 d-flex flex-column justify-content-center align-items-center">
-                  <h3>للمستخدمين تنزيل التطبيق</h3>
+                  <h3 style="margin-top: -200px">للمستخدمين تنزيل التطبيق</h3>
                   <h4>حمل التطبيق الآن من خلال المتاجر الالكترونية أو من خلال باركود</h4>
                   <div class="text-center d-flex justify-content-start">
                       <a href="https://play.google.com/store/apps/details?id=com.facebook.katana&hl=ar" class="m-2" target="_blank" rel="noopener noreferrer" style="border:none;text-decoration:none"><img height="40px" src="https://www.niftybuttons.com/googleplay/googleplay-button8.png"></a>

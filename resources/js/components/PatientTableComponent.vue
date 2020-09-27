@@ -59,7 +59,7 @@
                     </form>
                     <div v-if="!(isInjured() || isHealign())" class="d-flex justify-content-start">
                         <div class="w-25">
-                            <input type="text"  v-model="contactedId" @input="autoComplete" class="form-control" placeholder="الرقم الشخصي للمختلط به">
+                            <input type="text"  v-model="contactedId" class="form-control" placeholder="الرقم الشخصي للمختلط به">
                             <div class="panel-footer" v-if="results.length">
                                 <ul class="list-group" v-if="modal && contactedId.length">
                                     <li class="list-group-item" @focus="modal=true"  v-for="result in results" @click="setContactedId(result)">{{ result}}</li>
@@ -279,7 +279,6 @@ export default {
                     else{
                         this.patients.splice(this.patients.map(el=> {return el.id;}).indexOf(id), 1);
                     }
-
                     Swal.fire(
                         'تعديل الحالة !',
                         'تم تعديل الحالة بنحاج.',
