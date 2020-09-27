@@ -200,7 +200,12 @@ class PatientController extends Controller
                     'updated_at'=>now(),
                 ]);
             }
-
+            else{
+                $patient->update([
+                    'status'=>$request->status,
+                    'updated_at'=>now(),
+                ]);
+            }
         }else{
             $patient->update([
                 'status'=>$request->status,
