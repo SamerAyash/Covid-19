@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-          <h1 class="text-white text-center">{{'أهلا بك'}}</h1>
+          <h1 class="text-white text-center">{{'Be Safe'}}</h1>
           <div class="row row-cols-2">
               <div class="col">
                           <div class="col-12 col-sm-6 w-100">
