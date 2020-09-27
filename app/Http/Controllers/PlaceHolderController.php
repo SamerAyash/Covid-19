@@ -52,7 +52,7 @@ class PlaceHolderController extends Controller
             'area'=>'required',
             'street'=>'required',
             'name'=>'required',
-            'id_number'=>'required|unique:place_holders',
+            'id_number'=>'required',
             'phone'=>'required',
         ],[
             'place.required'=>"اسم المكان مطلوب",
