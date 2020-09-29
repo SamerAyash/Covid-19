@@ -56,7 +56,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b8251f15-8d8c-4d29-b3b4-77c3420d5f4c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/Covid19.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Covid19.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PlaceHolderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PlaceHolderController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/qrcode_download.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/qrcode_download.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/users/qrcode.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/qrcode.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -264,11 +270,19 @@
       <workItem from="1600966722120" duration="14873000" />
       <workItem from="1601028036123" duration="22910000" />
       <workItem from="1601068868622" duration="1476000" />
+      <workItem from="1601190453048" duration="303000" />
+      <workItem from="1601230428215" duration="5590000" />
+      <workItem from="1601273206421" duration="624000" />
+      <workItem from="1601328066044" duration="1618000" />
+      <workItem from="1601332350430" duration="2980000" />
+      <workItem from="1601362714961" duration="24000" />
+      <workItem from="1601414216166" duration="1910000" />
+      <workItem from="1601416144313" duration="2811000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -294,11 +308,11 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="461" y="276" key="ComposerInitDialogKey/0.0.1366.728@0.0.1366.728" timestamp="1599779299117" />
-    <state x="463" y="118" key="FileChooserDialogImpl" timestamp="1600671989194">
+    <state x="463" y="118" key="FileChooserDialogImpl" timestamp="1601362737564">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728/1366.0.1440.860@0.0.1366.728" timestamp="1600671989194" />
-    <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1600586537565" />
+    <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728/1366.0.1440.860@0.0.1366.728" timestamp="1601362737564" />
+    <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1601331344885" />
     <state width="1323" height="195" key="GridCell.Tab.0.bottom" timestamp="1599786940505">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -315,18 +329,18 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1323" height="195" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1599786940505" />
-    <state x="389" y="97" width="617" height="534" key="find.popup" timestamp="1601045656021">
+    <state x="389" y="97" width="617" height="534" key="find.popup" timestamp="1601236315641">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="389" y="97" width="617" height="534" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1601045656021" />
+    <state x="389" y="97" width="617" height="534" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1601236315641" />
     <state x="339" y="162" key="run.anything.popup" timestamp="1600995462287">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1600995462287" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1601156857952">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1601416345174">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/1366.0.1440.860@0.0.1366.728" timestamp="1601156857952" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1601056491304" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/1366.0.1440.860@0.0.1366.728" timestamp="1601157076816" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1601416345174" />
   </component>
 </project>

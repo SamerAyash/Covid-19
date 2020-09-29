@@ -76,22 +76,18 @@ class PlaceHolderController extends Controller
         $placeHolder->name= $request->name;
         $placeHolder->id_number= $request->id_number;
         $placeHolder->phone= $request->phone;
-
-        $qrcode_img= \QrCode::size(400)
-            ->encoding('UTF-8')
-            ->gradient(250, 0, 180, 100,50, 150, 'vertical')
-            ->generate('100000000'.$placeHolder->id.','.$placeHolder->place);
-
         $placeHolder->save();
 
         $place=$placeHolder->place;
         $id=$placeHolder->id;
-        //$pdf = \PDF::loadView('qrcode_download',compact('id','place'));
 
-        $html = \View::make('qrcode_download',compact('id','place'));
-        $pdfUPN = \PDF::loadHTML($html);
-        return $pdfUPN->download('QRcode.pdf');
-        return redirect(route('main_page'));
+        $login=true;
+        $onePage=false;
+
+        $pdf = \PDF::loadView('qrcode_download',compact('id','place','login','onePage'));
+        redirect()->route('main_page');
+        return $pdf->download('QRcode.pdf');
+
     }
 
     /**
@@ -100,9 +96,19 @@ class PlaceHolderController extends Controller
      * @param  \App\Models\PlaceHolder  $placeHolder
      * @return \Illuminate\Http\Response
      */
-    public function show(PlaceHolder $placeHolder)
+    public function downloadQR($status,$id)
     {
-        //
+        $placeHolder=PlaceHolder::whereId($id)->first();
+        $place=$placeHolder->place;
+        $id=$placeHolder->id;
+        if ($status == 'login')
+        $login=true;
+        else
+        $login=false;
+
+        $onePage=true;
+        $pdf = \PDF::loadView('qrcode_download',compact('id','place','login','onePage'));
+        return $pdf->download('QRcode.pdf');
     }
 
     /**

@@ -81,6 +81,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/contact/map/{id}', ['as' => 'contact.map', 'uses' => 'ContactMapController@show']);
     Route::get('/patient/autocomplete/search', ['as' => '', 'uses' => 'PatientController@searchId']);
 
+    Route::get('/getQR/{status}/{id}', ['as' => 'downloadQR', 'uses' => 'PlaceHolderController@downloadQR']);
+
 });
 
 
