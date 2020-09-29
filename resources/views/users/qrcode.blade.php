@@ -14,7 +14,10 @@
                      !!}
                     </div>
                     <div>
-                        <button class="btn btn-success">تنزيل رمز تسجيل الدخول</button>
+                        <a href="{{route('downloadQR',['status'=>'login','id'=>$id])}}">
+                            <button class="btn btn-success">تنزيل رمز تسجيل الدخول</button>
+                        </a>
+
                     </div>
                 </div>
                 <div class="col-12 col-sm-6">
@@ -26,7 +29,10 @@
                      !!}
                     </div>
                     <div>
-                        <button class="btn btn-danger">تنزيل رمز تسجيل خروج</button>
+                        <a href="{{route('downloadQR',['status'=>'logout','id'=>$id])}}">
+                            <button class="btn btn-danger">تنزيل رمز تسجيل خروج</button>
+                        </a>
+
                     </div>
                 </div>
             </div>
