@@ -10,7 +10,7 @@
                         {!! \QrCode::size(300)
                     ->encoding('UTF-8')
                     ->gradient(250, 0, 180, 100,50, 150, 'vertical')
-                    ->generate('110000000'.$id.','.$placee)
+                    ->generate(110000000+$id.','.$placee)
                      !!}
                     </div>
                     <div>
@@ -25,7 +25,7 @@
                         {!! \QrCode::size(300)
                     ->encoding('UTF-8')
                     ->gradient(250, 0, 180, 100,50, 150, 'vertical')
-                    ->generate('120000000'.$id.','.$placee)
+                    ->generate(120000000+$id.','.$placee)
                      !!}
                     </div>
                     <div>

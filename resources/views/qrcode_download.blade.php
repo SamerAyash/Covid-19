@@ -26,7 +26,7 @@
             ->encoding('UTF-8')
             ->format('png')
             ->gradient(0, 250, 100, 20,150,200, 'vertical')
-            ->generate('110000000'.$id.','.$place))}}'>
+            ->generate(110000000+$id.','.$place))}}'>
                 <h2>Login QR</h2>
             </div>
         @else
@@ -35,7 +35,7 @@
             ->encoding('UTF-8')
             ->format('png')
             ->gradient(250, 0, 50, 150,20,200, 'vertical')
-            ->generate('120000000'.$id.','.$place))}}'>
+            ->generate(120000000+$id.','.$place))}}'>
                 <h2>Logout QR</h2>
             </div>
         @endif
