@@ -46,18 +46,18 @@
                             <div class="col">
                                 <input type="text" class="form-control" v-model="patient.area" placeholder="المنطقة">
                             </div>
-                            <div class="col">
+                           <!-- <div class="col">
                                 <input type="date" class="form-control" v-if="isHealign()" v-model="patient.date_injury" placeholder="تاريخ الشفاء">
                             </div>
                             <div class="col">
                                 <input type="date" class="form-control" v-if="isInjured()" v-model="patient.date_injury" placeholder="تاريخ الإصابة">
-                            </div>
+                            </div>-->
                         </div>
-                        <button class="btn btn-primary" type="submit" >إضافة</button>
-                        <!--<button class="btn btn-primary" type="submit" v-if="patient.id">تعديل</button>
-                        <button class="btn btn-primary" @click="removeForm()" v-if="patient.id">إلغاء</button>-->
+                        <button class="btn btn-primary" type="submit" v-if="!patient.id">إضافة</button>
+                        <button class="btn btn-primary" type="submit" v-if="patient.id">تعديل</button>
+                        <button class="btn btn-primary" @click="removeForm()" v-if="patient.id">إلغاء</button>
                     </form>
-                    <div v-if="!(isInjured() || isHealign())" class="d-flex justify-content-start">
+                    <div class="d-flex justify-content-start">
                         <div class="w-25">
                             <input type="text"  v-model="contactedId" class="form-control" placeholder="الرقم الشخصي للمختلط به">
                             <div class="panel-footer" v-if="results.length">
@@ -119,11 +119,11 @@
                             <td v-if="isHealign()">{{patient.date_healing}}</td>
                             <td v-if="isInjured()">{{patient.injury_days}}</td>
                             <td class="td-actions d-flex justify-content-between">
-                                <!--<button type="button" rel="tooltip" title="Edit Task"
+                                <button type="button" rel="tooltip" title="Edit Task"
                                         @click="edit(patient)"
                                         class="btn btn-primary btn-link btn-sm">
                                     <i class="material-icons">edit</i>
-                                </button>-->
+                                </button>
                                 <button @click="deletePatient(patient.id,patient.name)" type="button" rel="tooltip" title="Remove"
                                         class="btn btn-danger btn-link btn-sm">
                                     <i class="material-icons">close</i>
@@ -159,6 +159,7 @@ export default {
             patients:[],
             patient:
                 {
+                    id:'',
                     first_name:'',
                     father_name:'',
                     granddad_name:'',
@@ -293,7 +294,9 @@ export default {
         edit(patient){
             this.patient= patient;
         },
-        removeForm(){this.patient=[]},
+        removeForm(){
+            this.patient=[]
+        },
         save(){
             axios.post('/patient',{
                 first_name:this.patient.first_name,
@@ -333,7 +336,7 @@ export default {
             return (this.patient.status === 'healthy' || this.patient.status === false);
         },
         onForm(){
-            if (this.patient.status == false || this.patient.status == 'healthy'){
+            if (this.route == '/dashboard/patient/gethealthy'){
                 return false;
             }
             else {
