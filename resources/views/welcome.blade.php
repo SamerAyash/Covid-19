@@ -1,25 +1,59 @@
 @extends('layouts.app', ['class' => 'off-canvas-sidebar', 'activePage' => 'home', 'title' => config('app.name')])
 
+@push('style')
+    <style>
+        /*Small devices (landscape phones, 576px and up)*/
+        @media (min-width: 576px) {
+
+        }
+
+        /*Medium devices (tablets, 768px and up)*/
+        @media (min-width: 768px) {
+            #form{
+                width: 500px;
+            }
+            .formCenter{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+
+        /*Large devices (desktops, 992px and up)*/
+        @media (min-width: 992px) {
+            #form{
+                width: 400px;
+            }
+        }
+
+        /*Extra large devices (large desktops, 1200px and up)*/
+        @media (min-width: 1200px) {
+            #form{
+                width: 400px;
+            }
+        }
+    </style>
+@endpush
 @section('content')
 <div class="container">
           <h1 class="text-white text-center">{{'Be Safe'}}</h1>
-          <div class="row row-cols-2">
-              <div class="col">
-                          <div class="col-12 col-sm-6 w-100">
-                              <h3>لأصحاب الأماكن</h3>
-                              <form class="form" method="POST" action="{{ route('genQr') }}" style="width: 400px">
-                                  @csrf
+         <div class="row">
+             <div class="col-lg-6 col-sm-12 col-md-12 formCenter">
+                         <div class="col-12 col-sm-6">
+                             <h3>لأصحاب الأماكن</h3>
+                             <form id="form" class="form" method="POST" action="{{ route('genQr') }}">
+                                 @csrf
 
-                                  <div class="card card-hidden">
-                                      <div class="card-header card-header-primary text-center">
-                                          <h4 class="card-title"><strong>تسجيل بيانات الباركود</strong></h4>
-                                      </div>
-                                      <div class="card-body">
-                                          <p class="card-description text-center">تسجيل بيانات المكان</p>
-                                          <div class="bmd-form-group mb-2">
-                                              <div class="input-group">
-                                                  <div class="input-group-prepend">
-                                                  <span class="input-group-text">
+                                 <div class="card card-hidden">
+                                     <div class="card-header card-header-primary text-center">
+                                         <h4 class="card-title"><strong>تسجيل بيانات الباركود</strong></h4>
+                                     </div>
+                                     <div class="card-body">
+                                         <p class="card-description text-center">تسجيل بيانات المكان</p>
+                                         <div class="bmd-form-group mb-2">
+                                             <div class="input-group">
+                                                 <div class="input-group-prepend">
+                                                 <span class="input-group-text">
                                                     <i class="material-icons">home_work</i>
                                                   </span>
                                                   </div>
@@ -125,10 +159,9 @@
                                   </div>
                               </form>
                              </div>
-
               </div>
-              <div class="col-6 d-flex flex-column justify-content-center align-items-center">
-                  <h3 style="margin-top: -200px">للمستخدمين تنزيل التطبيق</h3>
+              <div class="col-lg-6 col-sm-12 col-md-12  d-flex flex-column justify-content-center align-items-center">
+                  <h3>للمستخدمين تنزيل التطبيق</h3>
                   <h4>حمل التطبيق الآن من خلال المتاجر الالكترونية أو من خلال باركود</h4>
                   <div class="text-center d-flex justify-content-start">
                       <a href="https://play.google.com/store/apps/details?id=com.facebook.katana&hl=ar" class="m-2" target="_blank" rel="noopener noreferrer" style="border:none;text-decoration:none"><img height="40px" src="https://www.niftybuttons.com/googleplay/googleplay-button8.png"></a>
