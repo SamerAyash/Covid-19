@@ -2093,11 +2093,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PatientTableComponent",
   props: ['route'],
   data: function data() {
     return {
+      ConditionEdit: false,
       patients: [],
       patient: {
         id: '',
@@ -2158,6 +2160,9 @@ __webpack_require__.r(__webpack_exports__);
         this.patient.status = 'injured';
         return 'injured';
       }
+
+      this.patient.status = false;
+      return false;
     },
     getPatient: function getPatient() {
       var _this2 = this;
@@ -2235,10 +2240,12 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     edit: function edit(patient) {
-      this.patient = patient;
+      this.patient.id = patient.id, this.patient.first_name = patient.first_name, this.patient.father_name = patient.father_name, this.patient.granddad_name = patient.granddad_name, this.patient.last_name = patient.last_name, this.patient.id_number = patient.id_number, this.patient.gender = patient.gender, this.patient.phone = patient.phone, this.patient.status = patient.status, this.patient.city = patient.city, this.patient.area = patient.area, this.patient.date_injury = patient.date_injury, this.patient.contactedId = this.contactedId, this.patient.place = this.place, this.ConditionEdit = true;
     },
     removeForm: function removeForm() {
       this.patient = [];
+      this.ConditionEdit = false;
+      this.patient.status = this.check();
     },
     save: function save() {
       var _this5 = this;
@@ -2270,25 +2277,69 @@ __webpack_require__.r(__webpack_exports__);
         _this5.place = null;
       });
     },
+    update: function update() {
+      var _this6 = this;
+
+      axios.post('/patient/update', {
+        id: this.patient.id,
+        first_name: this.patient.first_name,
+        father_name: this.patient.father_name,
+        granddad_name: this.patient.granddad_name,
+        last_name: this.patient.last_name,
+        id_number: this.patient.id_number,
+        gender: this.patient.gender,
+        phone: this.patient.phone,
+        status: this.patient.status,
+        city: this.patient.city,
+        area: this.patient.area,
+        date_injury: this.patient.date_injury,
+        date_healing: this.patient.date_healing,
+        contactedId: this.contactedId,
+        place: this.place
+      }).then(function (res) {
+        Swal.fire('تعديل بيانات!', 'تم تعديل البيانات بنحاج.', 'success');
+
+        var patientEdite = _this6.patients.find(function (element) {
+          return element.id == _this6.patient.id;
+        });
+
+        console.log(patientEdite);
+        patientEdite = _this6.patient;
+        _this6.patient = {
+          status: _this6.check()
+        };
+        _this6.contactedId = '';
+        _this6.results = [];
+        _this6.place = null;
+        _this6.ConditionEdit = false;
+      });
+    },
     isInjured: function isInjured() {
       return this.patient.status === 'injured' || this.patient.status === false;
     },
     isHealign: function isHealign() {
       return this.patient.status === 'healthy' || this.patient.status === false;
     },
+    isContact: function isContact() {
+      return this.check() == 'contact';
+    },
     onForm: function onForm() {
-      if (this.route == '/dashboard/patient/gethealthy') {
-        return false;
-      } else {
+      if (this.ConditionEdit) {
         return true;
+      } else {
+        if (this.route == '/dashboard/patient/gethealthy' || this.patient.status == false) {
+          return false;
+        } else {
+          return true;
+        }
       }
     },
     search: function search() {
-      var _this6 = this;
+      var _this7 = this;
 
       axios.get('/patient/search/' + this.patient.status + '/' + this.searchID).then(function (res) {
-        _this6.patients = res.data.patients.data;
-        _this6.links = res.data.patients.links;
+        _this7.patients = res.data.patients.data;
+        _this7.links = res.data.patients.links;
       })["catch"](function (err) {
         console.log(err);
       });
@@ -38358,7 +38409,77 @@ var render = function() {
                             }
                           }
                         })
-                      ])
+                      ]),
+                      _vm._v(" "),
+                      _vm.isHealign()
+                        ? _c("div", { staticClass: "col" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.patient.date_healing,
+                                  expression: "patient.date_healing"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "date",
+                                placeholder: "تاريخ الشفاء"
+                              },
+                              domProps: { value: _vm.patient.date_healing },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.patient,
+                                    "date_healing",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("label", [_vm._v("تاريخ الشفاء")])
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.isInjured()
+                        ? _c("div", { staticClass: "col" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.patient.date_injury,
+                                  expression: "patient.date_injury"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "date",
+                                placeholder: "تاريخ الإصابة"
+                              },
+                              domProps: { value: _vm.patient.date_injury },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.patient,
+                                    "date_injury",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("label", [_vm._v("تاريخ الإصابة")])
+                          ])
+                        : _vm._e()
                     ]),
                     _vm._v(" "),
                     !_vm.patient.id
@@ -38377,7 +38498,13 @@ var render = function() {
                           "button",
                           {
                             staticClass: "btn btn-primary",
-                            attrs: { type: "submit" }
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.update()
+                              }
+                            }
                           },
                           [_vm._v("تعديل")]
                         )
@@ -38401,87 +38528,89 @@ var render = function() {
                 )
               : _vm._e(),
             _vm._v(" "),
-            _c("div", { staticClass: "d-flex justify-content-start" }, [
-              _c("div", { staticClass: "w-25" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.contactedId,
-                      expression: "contactedId"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    placeholder: "الرقم الشخصي للمختلط به"
-                  },
-                  domProps: { value: _vm.contactedId },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+            _vm.isContact()
+              ? _c("div", { staticClass: "d-flex justify-content-start" }, [
+                  _c("div", { staticClass: "w-25" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.contactedId,
+                          expression: "contactedId"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        placeholder: "الرقم الشخصي للمختلط به"
+                      },
+                      domProps: { value: _vm.contactedId },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.contactedId = $event.target.value
+                        }
                       }
-                      _vm.contactedId = $event.target.value
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _vm.results.length
-                  ? _c("div", { staticClass: "panel-footer" }, [
-                      _vm.modal && _vm.contactedId.length
-                        ? _c(
-                            "ul",
-                            { staticClass: "list-group" },
-                            _vm._l(_vm.results, function(result) {
-                              return _c(
-                                "li",
-                                {
-                                  staticClass: "list-group-item",
-                                  on: {
-                                    focus: function($event) {
-                                      _vm.modal = true
+                    }),
+                    _vm._v(" "),
+                    _vm.results.length
+                      ? _c("div", { staticClass: "panel-footer" }, [
+                          _vm.modal && _vm.contactedId.length
+                            ? _c(
+                                "ul",
+                                { staticClass: "list-group" },
+                                _vm._l(_vm.results, function(result) {
+                                  return _c(
+                                    "li",
+                                    {
+                                      staticClass: "list-group-item",
+                                      on: {
+                                        focus: function($event) {
+                                          _vm.modal = true
+                                        },
+                                        click: function($event) {
+                                          return _vm.setContactedId(result)
+                                        }
+                                      }
                                     },
-                                    click: function($event) {
-                                      return _vm.setContactedId(result)
-                                    }
-                                  }
-                                },
-                                [_vm._v(_vm._s(result))]
+                                    [_vm._v(_vm._s(result))]
+                                  )
+                                }),
+                                0
                               )
-                            }),
-                            0
-                          )
-                        : _vm._e()
-                    ])
-                  : _vm._e()
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "w-25 mx-2" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.place,
-                      expression: "place"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "text", placeholder: "مكان المخالطة" },
-                  domProps: { value: _vm.place },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+                            : _vm._e()
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "w-25 mx-2" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.place,
+                          expression: "place"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text", placeholder: "مكان المخالطة" },
+                      domProps: { value: _vm.place },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.place = $event.target.value
+                        }
                       }
-                      _vm.place = $event.target.value
-                    }
-                  }
-                })
-              ])
-            ]),
+                    })
+                  ])
+                ])
+              : _vm._e(),
             _vm._v(" "),
             _c("div", { staticClass: "form-group float-left w-25" }, [
               _c("label", { attrs: { for: "exampleInputEmail1" } }, [

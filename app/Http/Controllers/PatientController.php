@@ -259,4 +259,57 @@ class PatientController extends Controller
 
         return response()->json($patients);
     }
+
+    public function updatePatient(Request $request){
+
+        $request->validate([
+            'id'=>'required',
+            'first_name'=>'required',
+            'father_name'=>'required',
+            'granddad_name'=>'required',
+            'last_name'=>'required',
+            'id_number'=>'required|unique:patients,id,'.$request->id,
+            'gender'=>'required|in:male,female',
+            'phone'=>'required',
+            'city'=>'required',
+            'area'=>'required',
+        ]);
+        $patient=patient::find($request->id);
+        $patient->first_name=$request->first_name;
+        $patient->father_name=$request->father_name;
+        $patient->granddad_name=$request->granddad_name;
+        $patient->last_name=$request->last_name;
+        $patient->id_number=$request->id_number;
+        $patient->gender=$request->gender;
+        $patient->phone=$request->phone;
+        $patient->city=$request->city;
+        $patient->area=$request->area;
+        $patient->date_injury=$request->date_injury ?$request->date_injury:null;
+        $patient->date_healing=$request->date_healing ?$request->date_healing:null;
+        $patient->update();
+        if($request->status == 'contact' && $request->contactedId){
+            $p=new Object_();
+            $pat=patient::where('id_number',$request->contactedId)->first();
+            if (!is_null($pat)){
+                $p=$pat;
+            }
+            else{
+                $Newpatient=new patient();
+                $Newpatient->id_number=$request->contactedId;
+                $Newpatient->gender='male';
+                $Newpatient->status='contact';
+                $Newpatient->save();
+                $p=$Newpatient;
+            }
+            $contactMap=new ContactMap();
+            $contactMap->contact_id=$patient->id;
+            $contactMap->contact_with_id=$p->id;
+            $contactMap->place = $request->place;
+            $contactMap->date= today();
+            $contactMap->recognition_method=1;
+            $contactMap->save();
+
+        }
+        return response()->json(true,200);
+    }
 }
