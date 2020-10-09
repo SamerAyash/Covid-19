@@ -46,18 +46,20 @@
                             <div class="col">
                                 <input type="text" class="form-control" v-model="patient.area" placeholder="المنطقة">
                             </div>
-                           <!-- <div class="col">
-                                <input type="date" class="form-control" v-if="isHealign()" v-model="patient.date_injury" placeholder="تاريخ الشفاء">
+                           <div class="col" v-if="isHealign()">
+                                <input type="date" class="form-control" v-model="patient.date_healing" placeholder="تاريخ الشفاء">
+                               <label>تاريخ الشفاء</label>
                             </div>
-                            <div class="col">
-                                <input type="date" class="form-control" v-if="isInjured()" v-model="patient.date_injury" placeholder="تاريخ الإصابة">
-                            </div>-->
+                            <div class="col" v-if="isInjured()">
+                                <input type="date" class="form-control" v-model="patient.date_injury" placeholder="تاريخ الإصابة">
+                                <label>تاريخ الإصابة</label>
+                            </div>
                         </div>
                         <button class="btn btn-primary" type="submit" v-if="!patient.id">إضافة</button>
-                        <button class="btn btn-primary" type="submit" v-if="patient.id">تعديل</button>
+                        <button class="btn btn-primary" type="button" @click.prevent="update()" v-if="patient.id">تعديل</button>
                         <button class="btn btn-primary" @click="removeForm()" v-if="patient.id">إلغاء</button>
                     </form>
-                    <div class="d-flex justify-content-start">
+                    <div class="d-flex justify-content-start" v-if="isContact()">
                         <div class="w-25">
                             <input type="text"  v-model="contactedId" class="form-control" placeholder="الرقم الشخصي للمختلط به">
                             <div class="panel-footer" v-if="results.length">
@@ -68,7 +70,6 @@
                         </div>
                         <div class="w-25 mx-2">
                             <input type="text"  v-model="place" class="form-control" placeholder="مكان المخالطة">
-
                         </div>
                     </div>
                     <div  class="form-group float-left w-25">
@@ -156,6 +157,7 @@ export default {
     props:['route'],
     data(){
         return {
+            ConditionEdit:false,
             patients:[],
             patient:
                 {
@@ -213,6 +215,8 @@ export default {
                 this.patient.status = 'injured';
                 return 'injured';
             }
+            this.patient.status = false;
+            return false;
         },
         getPatient(url = this.$props.route){
             axios.get(url)
@@ -292,10 +296,26 @@ export default {
 
         },
         edit(patient){
-            this.patient= patient;
+                this.patient.id= patient.id,
+                this.patient.first_name= patient.first_name,
+                this.patient.father_name= patient.father_name,
+                this.patient.granddad_name= patient.granddad_name,
+                this.patient.last_name= patient.last_name,
+                this.patient.id_number= patient.id_number,
+                this.patient.gender= patient.gender,
+                this.patient.phone= patient.phone,
+                this.patient.status= patient.status,
+                this.patient.city= patient.city,
+                this.patient.area= patient.area,
+                this.patient.date_injury = patient.date_injury,
+                this.patient.contactedId= this.contactedId,
+                this.patient.place= this.place,
+            this.ConditionEdit = true;
         },
         removeForm(){
-            this.patient=[]
+            this.patient=[];
+            this.ConditionEdit = false;
+            this.patient.status= this.check();
         },
         save(){
             axios.post('/patient',{
@@ -312,6 +332,7 @@ export default {
                 date_injury :this.patient.date_injury,
                 contactedId:this.contactedId,
                 place:this.place,
+
             })
             .then(res=>{
                 Swal.fire(
@@ -328,6 +349,44 @@ export default {
                 this.place=null;
             })
         },
+        update(){
+            axios.post('/patient/update',{
+                id:this.patient.id,
+                first_name:this.patient.first_name,
+                father_name:this.patient.father_name,
+                granddad_name:this.patient.granddad_name,
+                last_name:this.patient.last_name,
+                id_number:this.patient.id_number,
+                gender:this.patient.gender,
+                phone:this.patient.phone,
+                status:this.patient.status,
+                city:this.patient.city,
+                area:this.patient.area,
+                date_injury :this.patient.date_injury,
+                date_healing :this.patient.date_healing,
+                contactedId:this.contactedId,
+                place:this.place,
+
+            })
+                .then(res=>{
+                    Swal.fire(
+                        'تعديل بيانات!',
+                        'تم تعديل البيانات بنحاج.',
+                        'success'
+                    )
+                    var patientEdite = this.patients.find(element => element.id == this.patient.id);
+
+
+                    patientEdite = this.patient;
+                    this.patient= {
+                        status: this.check()
+                    };
+                    this.contactedId='';
+                    this.results=[];
+                    this.place=null;
+                    this.ConditionEdit=false
+                })
+        },
         isInjured(){
             return (this.patient.status === 'injured' || this.patient.status === false);
         },
@@ -335,12 +394,19 @@ export default {
         isHealign(){
             return (this.patient.status === 'healthy' || this.patient.status === false);
         },
+        isContact(){
+            return (this.check() == 'contact');
+        },
         onForm(){
-            if (this.route == '/dashboard/patient/gethealthy'){
-                return false;
+            if (this.ConditionEdit){
+                return true;
             }
             else {
-                return true;
+                if (this.route == '/dashboard/patient/gethealthy' || this.patient.status == false) {
+                    return false;
+                } else {
+                    return true;
+                }
             }
         },
         search(){

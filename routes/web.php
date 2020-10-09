@@ -68,6 +68,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard/place/qr/{id}', ['as' => '', 'uses' => 'PlaceHolderController@getQrcode']);
 
 	Route::resource('patient','PatientController');
+	Route::post('/patient/update',['as'=>'','uses'=>'PatientController@updatePatient']);
+
+
     Route::get('dashboard/patients-all', ['as' => 'patients', 'uses' => 'PatientController@patients']);
     Route::get('dashboard/patients-healthy', ['as' => 'patients.healthy', 'uses' => 'PatientController@healthy']);
     Route::get('dashboard/patients-contact', ['as' => 'patients.contact', 'uses' => 'PatientController@contact']);
