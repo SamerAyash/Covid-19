@@ -41,12 +41,20 @@
             <p>إدارة المصابين</p>
         </a>
       </li>
-        <li class="nav-item{{ $activePage == 'place table' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('place_table') }}">
-          <i class="material-icons text-danger">place</i>
-            <p>الأماكن و المحلات</p>
-        </a>
-      </li>
+      @if(auth()->user()->type == 1)
+            <li class="nav-item{{ $activePage == 'place table' ? ' active' : '' }}">
+                <a class="nav-link" href="{{ route('place_table') }}">
+                    <i class="material-icons text-danger">place</i>
+                    <p>الأماكن و المحلات</p>
+                </a>
+            </li>
+            <li class="nav-item{{ $activePage == 'user table' ? ' active' : '' }}">
+                <a class="nav-link" href="{{ route('user_table')}}">
+                    <i class="material-icons text-primary">account_box</i>
+                    <p>إدارة المشرفين</p>
+                </a>
+            </li>
+        @endif
     </ul>
   </div>
 </div>
