@@ -57,15 +57,20 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::group(['middleware' => 'auth'], function () {
-	Route::resource('user', 'UserController', ['except' => ['show']]);
+
+    Route::group(['middleware' => ['admin']], function () {
+        Route::resource('user', 'UserController',['names'=>['index'=>'user_table','store'=>'user_store']]);
+        Route::get('/dashboard/get_users', ['as' => '', 'uses' => 'UserController@users']);
+        Route::get('/dashboard/user/search/{search}', ['as' => '', 'uses' => 'UserController@search']);
+        Route::get('dashboard/places-table', ['as' => 'place_table', 'uses' => 'PlaceHolderController@index']);
+        Route::get('dashboard/get_places', ['as' => '', 'uses' => 'PlaceHolderController@getPlaces']);
+        Route::get('/dashboard/place/search/{search}', ['as' => '', 'uses' => 'PlaceHolderController@search']);
+        Route::get('/dashboard/place/qr/{id}', ['as' => '', 'uses' => 'PlaceHolderController@getQrcode']);
+    });
+
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
-
-    Route::get('dashboard/places-table', ['as' => 'place_table', 'uses' => 'PlaceHolderController@index']);
-    Route::get('dashboard/get_places', ['as' => '', 'uses' => 'PlaceHolderController@getPlaces']);
-    Route::get('/dashboard/place/search/{search}', ['as' => '', 'uses' => 'PlaceHolderController@search']);
-    Route::get('/dashboard/place/qr/{id}', ['as' => '', 'uses' => 'PlaceHolderController@getQrcode']);
 
 	Route::resource('patient','PatientController');
 	Route::post('/patient/update',['as'=>'','uses'=>'PatientController@updatePatient']);
@@ -85,6 +90,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/patient/autocomplete/search', ['as' => '', 'uses' => 'PatientController@searchId']);
 
     Route::get('/getQR/{status}/{id}', ['as' => 'downloadQR', 'uses' => 'PlaceHolderController@downloadQR']);
+
+
 
 });
 
