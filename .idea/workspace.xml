@@ -56,21 +56,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b8251f15-8d8c-4d29-b3b4-77c3420d5f4c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Middleware/Admin.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/UserTableComponent.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/users/user.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/footer_qr.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/header_qr.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/logo.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/factories/UserFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/UserFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presets/material/src/material-stubs/resources/views/profile/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/presets/material/src/material-stubs/resources/views/profile/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/navbars/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/navbars/sidebar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/navbars/navs/guest.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/navbars/navs/guest.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/qrcode_download.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/qrcode_download.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -225,13 +217,14 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/img" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.folding" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="I:\Covid19\public\img" />
       <recent name="I:\Covid19\public\js" />
       <recent name="I:\Covid19\public\css" />
       <recent name="I:\Covid19\presets" />
@@ -300,7 +293,10 @@
       <workItem from="1602313813646" duration="27000" />
       <workItem from="1602361421059" duration="5087000" />
       <workItem from="1602400117186" duration="56000" />
-      <workItem from="1602449963205" duration="7745000" />
+      <workItem from="1602449963205" duration="7944000" />
+      <workItem from="1602487004072" duration="27000" />
+      <workItem from="1602531832365" duration="2675000" />
+      <workItem from="1602537047672" duration="1329000" />
     </task>
     <servers />
   </component>
@@ -357,20 +353,21 @@
       <screen x="1366" y="0" width="1440" height="860" />
     </state>
     <state x="1513" y="63" width="916" height="708" key="SettingsEditor/0.0.1366.728/1366.0.1440.860@0.0.1366.728" timestamp="1602021390583" />
-    <state x="389" y="97" width="617" height="534" key="find.popup" timestamp="1602255847870">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="1776" y="115" width="651" height="631" key="find.popup" timestamp="1602536730524">
+      <screen x="1366" y="0" width="1440" height="860" />
     </state>
     <state x="389" y="97" width="617" height="534" key="find.popup/0.0.1366.728/1366.0.1440.860@0.0.1366.728" timestamp="1602255847870" />
+    <state x="1776" y="115" width="651" height="631" key="find.popup/0.0.1366.728/1366.0.1440.860@1366.0.1440.860" timestamp="1602536730524" />
     <state x="389" y="97" width="617" height="534" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1601236315641" />
     <state x="339" y="162" key="run.anything.popup" timestamp="1600995462287">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1600995462287" />
-    <state x="1731" y="58" width="709" height="801" key="search.everywhere.popup" timestamp="1602457856003">
+    <state x="1731" y="58" width="709" height="801" key="search.everywhere.popup" timestamp="1602536482696">
       <screen x="1366" y="0" width="1440" height="860" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/1366.0.1440.860@0.0.1366.728" timestamp="1602257727234" />
-    <state x="1731" y="58" width="709" height="801" key="search.everywhere.popup/0.0.1366.728/1366.0.1440.860@1366.0.1440.860" timestamp="1602457856003" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/1366.0.1440.860@0.0.1366.728" timestamp="1602532131971" />
+    <state x="1731" y="58" width="709" height="801" key="search.everywhere.popup/0.0.1366.728/1366.0.1440.860@1366.0.1440.860" timestamp="1602536482696" />
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1602368458063" />
   </component>
 </project>

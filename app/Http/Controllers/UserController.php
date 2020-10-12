@@ -69,6 +69,7 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'type'=>2,
+            'password'=>Hash::make('12345678')
         ]);
 
         // Save user to database
