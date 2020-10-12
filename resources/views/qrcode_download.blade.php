@@ -22,20 +22,24 @@
     @if($onePage)
         @if($login)
             <div style="margin-bottom: 300px">
+                <img src="{{asset('/js/header_qr.jpg')}}">
                 <img src='data:image/png;base64,{{base64_encode(\QrCode::size(400)
-            ->encoding('UTF-8')
-            ->format('png')
-            ->gradient(0, 250, 100, 20,150,200, 'vertical')
-            ->generate(110000000+$id.','.$place))}}'>
+                    ->encoding('UTF-8')
+                    ->format('png')
+                    ->gradient(0, 250, 100, 20,150,200, 'vertical')
+                    ->generate(110000000+$id.','.$place))}}'>
+                <img src="{{asset('/js/footer_qr.jpg')}}">
                 <h2>Login QR</h2>
             </div>
         @else
             <div style="margin-top: 200px">
+                <img src="{{asset('/js/header_qr.jpg')}}">
                 <img src='data:image/png;base64,{{base64_encode(\QrCode::size(400)
-            ->encoding('UTF-8')
-            ->format('png')
-            ->gradient(250, 0, 50, 150,20,200, 'vertical')
-            ->generate(120000000+$id.','.$place))}}'>
+                    ->encoding('UTF-8')
+                    ->format('png')
+                    ->gradient(250, 0, 50, 150,20,200, 'vertical')
+                    ->generate(120000000+$id.','.$place))}}'>
+                <img src="{{asset('/js/footer_qr.jpg')}}">
                 <h2>Logout QR</h2>
             </div>
         @endif
