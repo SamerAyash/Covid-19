@@ -55,6 +55,12 @@
                 </a>
             </li>
         @endif
+        <li class="nav-item{{ $activePage == 'checkin table' ? ' active' : '' }}">
+            <a class="nav-link" href="{{ route('checkin_table')}}">
+                <i class="material-icons text-primary">login</i>
+                <p>جدول تسجيل الدخول</p>
+            </a>
+        </li>
     </ul>
   </div>
 </div>
