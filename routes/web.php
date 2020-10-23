@@ -91,8 +91,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/getQR/{status}/{id}', ['as' => 'downloadQR', 'uses' => 'PlaceHolderController@downloadQR']);
 
-
-
+    Route::get('/checkin/table',function (){
+        return view('checkIn.checkin_table');
+    })->name('checkin_table');
 });
 
 
