@@ -22,10 +22,6 @@ class PlaceHolderController extends Controller
     public function getPlaces()
     {
         $places = PlaceHolder::paginate(20);
-        /*foreach ($places->items() as $item){
-            $item['created_at'] =
-              Carbon::createFromFormat('Y-m-d H:i:s', $item->created_at)->;
-        }*/
 
         return response()->json($places,200);
     }

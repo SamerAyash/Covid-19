@@ -21,6 +21,8 @@ Auth::routes(['register' => false]);
 
 Route::post('/generate/qrcode',['as'=>'genQr','uses'=>'PlaceHolderController@store']);
 
+    Route::post('/generate/user_qrcode',['as'=>'genQrForUser','uses'=>'UserQrController@store']);
+
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home',[
         'uses'=>'HomeController@index',
@@ -90,6 +92,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/patient/autocomplete/search', ['as' => '', 'uses' => 'PatientController@searchId']);
 
     Route::get('/getQR/{status}/{id}', ['as' => 'downloadQR', 'uses' => 'PlaceHolderController@downloadQR']);
+    Route::resource('/dashboard/user/qr','UserQrController',[
+        'names'=>[
+        'index'=>'userQr_table',
+        ]
+    ]);
 
     Route::get('/checkin/table',function (){
         return view('checkIn.checkin_table');

@@ -6,6 +6,7 @@ use App\Models\ContactMap;
 use App\Models\patient;
 use App\Models\PlaceHolder;
 use App\Models\User;
+use App\Models\UserQr;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -31,5 +32,6 @@ class DatabaseSeeder extends Seeder
          patient::factory(100)->create();
          ContactMap::factory(50)->create();
          PlaceHolder::factory(50)->create();
+         UserQr::factory(50)->create();
     }
 }

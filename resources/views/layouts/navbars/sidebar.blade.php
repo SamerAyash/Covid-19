@@ -61,6 +61,12 @@
                 </a>
             </li>
         @endif
+        <li class="nav-item{{ $activePage == 'userQr table' ? ' active' : '' }}">
+            <a class="nav-link" href="{{ route('userQr_table')}}">
+                <i class="material-icons text-secondary">supervisor_account</i>
+                <p>جدول المستخدمين</p>
+            </a>
+        </li>
 
     </ul>
   </div>

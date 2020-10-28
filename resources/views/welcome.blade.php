@@ -37,13 +37,12 @@
 @section('content')
 <div class="container">
           <h1 class="text-white text-center">{{'Be Safe'}}</h1>
-         <div class="row">
+         <div class="row m-2">
              <div class="col-lg-6 col-sm-12 col-md-12 formCenter">
                          <div class="col-12 col-sm-6">
                              <h3>لأصحاب الأماكن</h3>
                              <form id="form" class="form" method="POST" action="{{ route('genQr') }}">
                                  @csrf
-
                                  <div class="card card-hidden">
                                      <div class="card-header card-header-primary text-center">
                                          <h4 class="card-title"><strong>تسجيل بيانات الباركود</strong></h4>
@@ -160,21 +159,80 @@
                               </form>
                              </div>
               </div>
-              <div class="col-lg-6 col-sm-12 col-md-12  d-flex flex-column justify-content-center align-items-center">
-                  <h3>للمستخدمين تنزيل التطبيق</h3>
-                  <h4>حمل التطبيق الآن من خلال المتاجر الالكترونية أو من خلال باركود</h4>
-                  <div class="text-center d-flex justify-content-start">
-                      <a href="https://play.google.com/store/apps/details?id=com.facebook.katana&hl=ar" class="m-2" target="_blank" rel="noopener noreferrer" style="border:none;text-decoration:none"><img height="40px" src="https://www.niftybuttons.com/googleplay/googleplay-button8.png"></a>
-                      <br>
-                      <a href="https://apps.apple.com/us/app/facebook/id284882215" class="m-2" target="_blank" rel="noopener noreferrer" style="border:none;text-decoration:none"><img height="40px" src="https://www.niftybuttons.com/itunes/itunesbutton6.png"></a>
-                  </div>
-                  <div class="mt-3">
-                      {!! \QrCode::size(250)
-                        ->gradient(250, 0, 180, 100,50, 150, 'vertical')
-                        ->generate('https://play.google.com/store/apps/details?id=com.facebook.orca&hl=ar');
-                      !!}
+              <div class="col-lg-6 col-sm-12 col-md-12 formCenter">
+                  <div class="col-12 col-sm-6">
+                      <h3>إنشاء رمز (QR code) للمستخدمين</h3>
+                      <form id="form" class="form" method="POST" action="{{ route('genQrForUser') }}">
+                          @csrf
+                          <div class="card card-hidden">
+                              <div class="card-header card-header-primary text-center">
+                                  <h4 class="card-title"><strong>تسجيل بيانات الباركود</strong></h4>
+                              </div>
+                              <div class="card-body">
+                                  <p class="card-description text-center">تسجيل بيانات المستخدم</p>
+                                  <div class="bmd-form-group mb-2">
+                                      <div class="input-group">
+                                          <div class="input-group-prepend">
+                                                  <span class="input-group-text">
+                                                    <i class="material-icons">perm_identity</i>
+                                                  </span>
+                                          </div>
+                                          <input type="text" name="name" class="form-control" placeholder="أدخل الاسم الرباعي" value="{{ old('name') }}" required>
+                                      </div>
+                                      @if ($errors->has('name'))
+                                          <div class="error text-danger pl-3" style="display: block;">
+                                              <strong>{{ $errors->first('name') }}</strong>
+                                          </div>
+                                      @endif
+                                  </div>
+                                  <div class="bmd-form-group mb-2">
+                                      <div class="input-group">
+                                          <div class="input-group-prepend">
+                                              <span class="input-group-text">
+                                                <i class="material-icons">contacts</i>
+                                              </span>
+                                          </div>
+                                          <input type="text" name="id_number" class="form-control mx-2" placeholder="رقم الهوية" value="{{ old('id_number') }}" required>
+                                          <input type="text" name="region" class="form-control mx-2" placeholder="الحي أو المنطقة" value="{{ old('region') }}" required>
+                                          @if ($errors->has('id_number'))
+                                              <div class="error text-danger pl-3" style="display: block;">
+                                                  <strong>{{ $errors->first('id_number') }}</strong>
+                                              </div>
+                                          @endif
+                                          @if ($errors->has('region'))
+                                              <div class="error text-danger pl-3" style="display: block;">
+                                                  <strong>{{ $errors->first('region') }}</strong>
+                                              </div>
+                                          @endif
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="card-footer justify-content-center">
+                                  <button type="submit" class="btn btn-primary btn-link btn-lg">إنشاء الرمز الخاص للمستخدم</button>
+                              </div>
+                          </div>
+                      </form>
                   </div>
               </div>
-  </div>
+        </div>
+    <div class="row">
+        <div class="col-lg-12 col-sm-12 col-md-12  d-flex flex-column justify-content-center align-items-center">
+            <h3>للمستخدمين تنزيل التطبيق</h3>
+            <h4>حمل التطبيق الآن من خلال المتاجر الالكترونية أو من خلال باركود</h4>
+            <div class="text-center d-flex justify-content-start">
+                <a href="https://play.google.com/store/apps/details?id=com.facebook.katana&hl=ar" class="m-2" target="_blank" rel="noopener noreferrer" style="border:none;text-decoration:none"><img height="40px" src="https://www.niftybuttons.com/googleplay/googleplay-button8.png"></a>
+                <br>
+                <a href="https://apps.apple.com/us/app/facebook/id284882215" class="m-2" target="_blank" rel="noopener noreferrer" style="border:none;text-decoration:none"><img height="40px" src="https://www.niftybuttons.com/itunes/itunesbutton6.png"></a>
+            </div>
+            <div class="mt-3 rounded rounded-lg border-danger" style="background-color: white">
+                <div class="p-3">
+                    {!! \QrCode::size(300)
+                  ->gradient(250, 0, 180, 100,50, 150, 'vertical')
+                  ->generate('https://play.google.com/store/apps/details?id=com.facebook.orca&hl=ar');
+                    !!}
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection
