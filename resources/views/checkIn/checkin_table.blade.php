@@ -1,9 +1,7 @@
 @extends('layouts.app', ['activePage' => 'checkin table', 'titlePage' => 'جدول الأماكن و المحلات'])
 
 @section('content')
-    <?php
-        $checkins= DB::table('checkins')->paginate(15);
-    ?>
+
     <div class="content">
         <div class="container-fluid">
             <div class="col-12">
@@ -13,6 +11,14 @@
                         <p class="card-category"></p>
                     </div>
                     <div class="card-body table-responsive">
+                        <form method="post" action="{{route('checkin_search')}}">
+                            @csrf
+                            <div  class="form-group float-left w-25">
+                                <label for="exampleInputEmail1">البحث</label>
+                                <input type="text" class="form-control" id="exampleInputEmail1"
+                                       name="search"  placeholder="المكان أو رقم الجهاز">
+                            </div>
+                        </form>
                         <table class="table">
                             <thead>
                             <tr>

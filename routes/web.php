@@ -66,8 +66,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/dashboard/user/search/{search}', ['as' => '', 'uses' => 'UserController@search']);
         Route::get('dashboard/places-table', ['as' => 'place_table', 'uses' => 'PlaceHolderController@index']);
         Route::get('dashboard/get_places', ['as' => '', 'uses' => 'PlaceHolderController@getPlaces']);
-        Route::get('/dashboard/place/search/{search}', ['as' => '', 'uses' => 'PlaceHolderController@search']);
-        Route::get('/dashboard/place/qr/{id}', ['as' => '', 'uses' => 'PlaceHolderController@getQrcode']);
     });
 
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
@@ -97,10 +95,23 @@ Route::group(['middleware' => 'auth'], function () {
         'index'=>'userQr_table',
         ]
     ]);
+    Route::get('dashboard/get_usersQr', ['as' => '', 'uses' => 'UserQrController@getUserQr']);
+    Route::get('/dashboard/userQr/search/{search}', ['as' => '', 'uses' => 'UserQrController@search']);
+    Route::get('/dashboard/userQr/qr/{id}', ['as' => '', 'uses' => 'UserQrController@downloadQR']);
 
     Route::get('/checkin/table',function (){
-        return view('checkIn.checkin_table');
+        $checkins= DB::table('checkins')->paginate(15);
+        return view('checkIn.checkin_table',compact('checkins'));
     })->name('checkin_table');
+
+    Route::post('/checkin/table/search',function (\Illuminate\Http\Request $request){
+
+        $checkins= DB::table('checkins')
+            ->where('place_id','LIKE','%'.$request->search.'%')
+            ->orWhere('device_id','LIKE','%'.$request->search.'%')->paginate(15);
+        return view('checkIn.checkin_table',compact('checkins'));
+    })->name('checkin_search');
+
 });
 
 

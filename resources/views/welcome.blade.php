@@ -177,11 +177,11 @@
                                                     <i class="material-icons">perm_identity</i>
                                                   </span>
                                           </div>
-                                          <input type="text" name="name" class="form-control" placeholder="أدخل الاسم الرباعي" value="{{ old('name') }}" required>
+                                          <input type="text" name="user_name" class="form-control" placeholder="أدخل الاسم الرباعي" value="{{ old('user_name') }}" required>
                                       </div>
-                                      @if ($errors->has('name'))
+                                      @if ($errors->has('user_name'))
                                           <div class="error text-danger pl-3" style="display: block;">
-                                              <strong>{{ $errors->first('name') }}</strong>
+                                              <strong>{{ $errors->first('user_name') }}</strong>
                                           </div>
                                       @endif
                                   </div>
@@ -192,16 +192,16 @@
                                                 <i class="material-icons">contacts</i>
                                               </span>
                                           </div>
-                                          <input type="text" name="id_number" class="form-control mx-2" placeholder="رقم الهوية" value="{{ old('id_number') }}" required>
-                                          <input type="text" name="region" class="form-control mx-2" placeholder="الحي أو المنطقة" value="{{ old('region') }}" required>
-                                          @if ($errors->has('id_number'))
+                                          <input type="text" name="user_id_number" class="form-control mx-2" placeholder="رقم الهوية" value="{{ old('user_id_number') }}" required>
+                                          <input type="text" name="user_region" class="form-control mx-2" placeholder="الحي أو المنطقة" value="{{ old('user_region') }}" required>
+                                          @if ($errors->has('user_id_number'))
                                               <div class="error text-danger pl-3" style="display: block;">
-                                                  <strong>{{ $errors->first('id_number') }}</strong>
+                                                  <strong>{{ $errors->first('user_id_number') }}</strong>
                                               </div>
                                           @endif
-                                          @if ($errors->has('region'))
+                                          @if ($errors->has('user_region'))
                                               <div class="error text-danger pl-3" style="display: block;">
-                                                  <strong>{{ $errors->first('region') }}</strong>
+                                                  <strong>{{ $errors->first('user_region') }}</strong>
                                               </div>
                                           @endif
                                       </div>

@@ -242,7 +242,6 @@ export default {
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'نعم, احذف العنصر'
             }).then((result) => {
-                console.log(result)
                 if (result.value) {
                     axios.delete('/patient/'+id)
                     .then(res=>{

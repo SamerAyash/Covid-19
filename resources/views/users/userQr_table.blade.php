@@ -4,7 +4,7 @@
     <div class="content">
         <div class="container-fluid">
             <div id="app">
-                <place-table-component></place-table-component>
+                <user-qr-component></user-qr-component>
             </div>
         </div>
     </div>
