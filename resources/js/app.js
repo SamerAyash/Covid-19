@@ -11,6 +11,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('patient-table-component', require('./components/PatientTableComponent.vue').default);
 Vue.component('place-table-component', require('./components/placeTableComponent').default);
 Vue.component('user-table-component', require('./components/UserTableComponent').default);
+Vue.component('user-qr-component', require('./components/UserQrComponent').default);
 
 const app = new Vue({
     el: '#app',

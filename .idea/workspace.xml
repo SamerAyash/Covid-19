@@ -56,18 +56,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b8251f15-8d8c-4d29-b3b4-77c3420d5f4c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/UserQrController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/UserQr.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/factories/UserQrFactory.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_10_29_013349_create_user_qrs_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/seeds/UserQrSeeder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/users/userQr_table.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Covid19.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Covid19.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/UserQrComponent.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/userQrcode_download.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PlaceHolderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PlaceHolderController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/navbars/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/navbars/sidebar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserQrController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserQrController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/PatientTableComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/PatientTableComponent.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/checkIn/checkin_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/checkIn/checkin_table.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/page_templates/auth.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/page_templates/auth.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/users/userQr_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/userQr_table.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
@@ -248,6 +247,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="I:\Covid19\resources\views\users" />
       <recent name="I:\Covid19\public\img" />
       <recent name="I:\Covid19\public\js" />
       <recent name="I:\Covid19\public\css" />
@@ -326,7 +326,8 @@
       <workItem from="1603488527993" duration="800000" />
       <workItem from="1603525966171" duration="24000" />
       <workItem from="1603699464315" duration="315000" />
-      <workItem from="1603912778729" duration="6199000" />
+      <workItem from="1603912778729" duration="6351000" />
+      <workItem from="1604075331252" duration="9421000" />
     </task>
     <servers />
   </component>
@@ -383,21 +384,21 @@
       <screen x="1366" y="0" width="1440" height="860" />
     </state>
     <state x="1513" y="63" width="916" height="708" key="SettingsEditor/0.0.1366.728/1366.0.1440.860@0.0.1366.728" timestamp="1602021390583" />
-    <state x="389" y="97" width="617" height="534" key="find.popup" timestamp="1603913556768">
+    <state x="389" y="97" width="617" height="534" key="find.popup" timestamp="1604087565746">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="389" y="97" width="617" height="534" key="find.popup/0.0.1366.728/1366.0.1440.860@0.0.1366.728" timestamp="1602255847870" />
+    <state x="389" y="97" width="617" height="534" key="find.popup/0.0.1366.728/1366.0.1440.860@0.0.1366.728" timestamp="1604087565746" />
     <state x="1776" y="115" width="651" height="631" key="find.popup/0.0.1366.728/1366.0.1440.860@1366.0.1440.860" timestamp="1602536730524" />
     <state x="389" y="97" width="617" height="534" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1603913556768" />
     <state x="339" y="162" key="run.anything.popup" timestamp="1600995462287">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1600995462287" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1603928839111">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1604089434151">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/1366.0.1024.728@0.0.1366.728" timestamp="1603924335042" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/1366.0.1440.860@0.0.1366.728" timestamp="1603699493961" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/1366.0.1440.860@0.0.1366.728" timestamp="1604089434151" />
     <state x="1731" y="58" width="709" height="801" key="search.everywhere.popup/0.0.1366.728/1366.0.1440.860@1366.0.1440.860" timestamp="1602536482696" />
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1603928839111" />
   </component>
